@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Karla } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./components/providers";
+import Appbar from "@/app/components/Appbar";
+import SignInPanel from "./components/SignInPanel";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const karla = Karla({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -24,10 +22,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${karla.className} antialiased`}>
+        <Providers>
+          <Appbar>
+            <SignInPanel />
+          </Appbar>
+          {children}
+        </Providers>
       </body>
     </html>
   );
