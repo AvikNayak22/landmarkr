@@ -9,6 +9,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs";
 import { User } from "@prisma/client";
 import UserProfilePanel from "./UserProfilePanel";
+import { getUserById } from "@/lib/actions/user";
 
 const SignInPanel = () => {
   const { isAuthenticated, getUser } = useKindeBrowserClient();
@@ -20,17 +21,8 @@ const SignInPanel = () => {
     const fetchUser = async () => {
       if (isAuthenticated && user?.id) {
         try {
-          const response = await fetch("/api/fetch-user", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ id: user.id }),
-          });
-          if (response.ok) {
-            const userData = await response.json();
-            setDbUser(userData);
-          }
+          const userData = await getUserById(user.id);
+          setDbUser(userData);
         } catch (error) {
           console.error("Error fetching user data:", error);
         }
