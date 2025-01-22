@@ -7,6 +7,8 @@ import { PropertyStatus, PropertyType } from "@prisma/client";
 import { cn } from "@heroui/react";
 import Location from "./Location";
 import Features from "./Features";
+import Picture from "./Picture";
+import Contact from "./Contact";
 
 const steps = [
   {
@@ -32,6 +34,7 @@ interface Props {
 }
 
 const AddPropertyForm = (props: Props) => {
+  const [images, setImages] = useState<File[]>([]);
   const [step, setStep] = useState(0);
 
   return (
@@ -53,6 +56,17 @@ const AddPropertyForm = (props: Props) => {
           next={() => setStep((prev) => prev + 1)}
           prev={() => setStep((prev) => prev - 1)}
           className={cn({ hidden: step !== 2 })}
+        />
+        <Picture
+          next={() => setStep((prev) => prev + 1)}
+          prev={() => setStep((prev) => prev - 1)}
+          className={cn({ hidden: step !== 3 })}
+          images={images}
+          setImages={setImages}
+        />
+        <Contact
+          prev={() => setStep((prev) => prev - 1)}
+          className={cn({ hidden: step !== 4 })}
         />
       </form>
     </div>

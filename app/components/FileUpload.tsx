@@ -22,11 +22,13 @@ const FileInput = React.forwardRef<HTMLInputElement, IProps>(
     ref
   ) => {
     const [fileName, setFileName] = useState("");
-    function fileChangedHandler(e: any) {
-      const file = e.target.files[0];
-      setFileName(file.name);
-      onChange && onChange(e);
-      onSelect && onSelect(e);
+    function fileChangedHandler(e: React.ChangeEvent<HTMLInputElement>) {
+      const file = e.target.files?.[0];
+      if (file) {
+        setFileName(file.name);
+        if (onChange) onChange(e);
+        if (onSelect) onSelect(e);
+      }
     }
 
     return (
