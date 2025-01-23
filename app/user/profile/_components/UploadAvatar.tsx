@@ -38,7 +38,9 @@ const UploadAvatar = ({ userId }: { userId: string }) => {
               </ModalHeader>
               <ModalBody>
                 <FileInput
-                  onChange={(e) => setImage((e as any).target.files[0])}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setImage(e.target.files?.[0])
+                  }
                 />
                 {image && (
                   <Image src={URL.createObjectURL(image)} alt="image preview" />

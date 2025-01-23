@@ -2,18 +2,33 @@ import { z } from "zod";
 import validator from "validator";
 
 export const AddPropertyFormSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  typeId: z.string().transform((data: unknown) => Number(data)),
-  statusId: z.string().transform((data: unknown) => Number(data)),
-  price: z.string().transform((data: unknown) => Number(data)),
+  name: z.string().min(1, "Please Enter The Name"),
+  description: z.string().min(2, "Enter the description"),
+  typeId: z
+    .string()
+    .min(1, "Select the type of your property")
+    .transform((data: unknown) => Number(data)),
+  statusId: z
+    .string()
+    .min(1, "Select the status of your property")
+    .transform((data: unknown) => Number(data)),
+  price: z
+    .string()
+    .min(1, "Enter the price")
+    .regex(new RegExp("^[0-9]+$"), "Please Enter Number")
+    .transform((data: unknown) => Number(data)),
   location: z.object({
-    streetAddress: z.string(),
-    city: z.string(),
-    state: z.string(),
-    zip: z.string(),
-    region: z.string(),
-    landmark: z.string(),
+    streetAddress: z.string().min(1, "Enter the street address"),
+    city: z.string().min(1, "Enter the city name"),
+    state: z.string().min(1, "Enter the state name"),
+    zip: z
+      .string()
+      .refine(
+        (data) => validator.isPostalCode(data, "IN"),
+        "Please Enter a valid zip code"
+      ),
+    region: z.string().min(1, "Enter the region"),
+    landmark: z.string().min(1, "Enter the landmark"),
   }),
   propertyFeature: z.object({
     bedrooms: z.string().transform((data: unknown) => Number(data)),
