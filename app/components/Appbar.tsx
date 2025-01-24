@@ -5,11 +5,8 @@ import {
   Navbar,
   NavbarBrand,
   NavbarContent,
-  NavbarItem,
   NavbarMenuToggle,
-  Button,
   NavbarMenu,
-  //   NavbarMenuItem,
 } from "@heroui/react";
 import Link from "next/link";
 import { HomeModernIcon } from "@heroicons/react/16/solid";

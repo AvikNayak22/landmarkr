@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./components/providers";
 import Appbar from "@/app/components/Appbar";
 import SignInPanel from "./components/SignInPanel";
+import { ToastContainer } from "react-toastify";
 
 const karla = Karla({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
             <SignInPanel />
           </Appbar>
           {children}
+          <ToastContainer />
         </Providers>
       </body>
     </html>

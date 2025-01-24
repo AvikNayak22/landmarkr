@@ -63,7 +63,7 @@ const UploadAvatar = ({ userId }: { userId: string }) => {
 
                     const avatarUrl = await uploadAvatar(image);
 
-                    const result = await updateUserAvatar(avatarUrl, userId);
+                    await updateUserAvatar(avatarUrl, userId);
 
                     router.refresh();
 
