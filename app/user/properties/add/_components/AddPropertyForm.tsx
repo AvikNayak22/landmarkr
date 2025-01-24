@@ -55,7 +55,12 @@ const AddPropertyForm = (props: Props) => {
     <div>
       <Stepper items={steps} activeItem={step} setActiveItem={setStep} />
       <FormProvider {...methods}>
-        <form className="mt-3 p-2" onSubmit={methods.handleSubmit(onSubmit)}>
+        <form
+          className="mt-3 p-2"
+          onSubmit={methods.handleSubmit(onSubmit, (errors) =>
+            console.log({ errors })
+          )}
+        >
           <Basic
             className={cn({ hidden: step !== 0 })}
             next={() => setStep((prev) => prev + 1)}

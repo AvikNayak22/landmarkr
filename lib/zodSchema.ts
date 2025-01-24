@@ -31,16 +31,28 @@ export const AddPropertyFormSchema = z.object({
     landmark: z.string().min(1, "Enter the landmark"),
   }),
   propertyFeature: z.object({
-    bedrooms: z.string().transform((data: unknown) => Number(data)),
-    bathrooms: z.string().transform((data: unknown) => Number(data)),
-    parkingSpots: z.string().transform((data: unknown) => Number(data)),
-    area: z.string().transform((data: unknown) => Number(data)),
+    bedrooms: z
+      .string()
+      .regex(new RegExp("^[0-9]+$"), "Please enter number of the bedrooms")
+      .transform((data: unknown) => Number(data)),
+    bathrooms: z
+      .string()
+      .regex(new RegExp("^[0-9]+$"), "Please enter number of the bathrooms")
+      .transform((data: unknown) => Number(data)),
+    parkingSpots: z
+      .string()
+      .regex(new RegExp("^[0-9]+$"), "Please enter number of the parking spots")
+      .transform((data: unknown) => Number(data)),
+    area: z
+      .string()
+      .regex(new RegExp("^[0-9]+$"), "Please enter area")
+      .transform((data: unknown) => Number(data)),
     hasSwimmingPool: z.boolean(),
     hasGardenYard: z.boolean(),
     hasBalcony: z.boolean(),
   }),
   contact: z.object({
-    name: z.string(),
+    name: z.string().min(1, "Please enter the contact name"),
     phone: z
       .string()
       .refine(validator.isMobilePhone, "Please enter a valid phone number"),
