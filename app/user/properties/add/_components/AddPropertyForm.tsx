@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Stepper from "./Stepper";
 import Basic from "./Basic";
-import { PropertyStatus, PropertyType } from "@prisma/client";
+import { Prisma, PropertyStatus, PropertyType } from "@prisma/client";
 import { cn } from "@heroui/react";
 import Location from "./Location";
 import Features from "./Features";
@@ -40,13 +40,33 @@ const steps = [
 interface Props {
   types: PropertyType[];
   statuses: PropertyStatus[];
+  property?: Prisma.PropertyGetPayload<{
+    include: {
+      location: true;
+      contact: true;
+      feature: true;
+      images: true;
+    };
+  }>;
+
+  isEdit?: boolean;
 }
 
 export type AddPropertyInputType = z.infer<typeof AddPropertyFormSchema>;
 
-const AddPropertyForm = (props: Props) => {
+const AddPropertyForm = ({ isEdit = false, ...props }: Props) => {
   const methods = useForm<AddPropertyInputType>({
     resolver: zodResolver(AddPropertyFormSchema),
+    defaultValues: {
+      contact: props.property?.contact ?? undefined,
+      location: props.property?.location ?? undefined,
+      propertyFeature: props.property?.feature ?? undefined,
+      description: props.property?.description ?? undefined,
+      name: props.property?.name ?? undefined,
+      price: props.property?.price ?? undefined,
+      statusId: props.property?.statusId ?? undefined,
+      typeId: props.property?.typeId ?? undefined,
+    },
   });
 
   const [images, setImages] = useState<File[]>([]);

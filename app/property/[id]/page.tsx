@@ -2,7 +2,6 @@ import { ImagesSlider } from "@/app/components/imageSlider";
 import PageTitle from "@/app/components/PageTitle";
 import prisma from "@/lib/prisma";
 import { Card } from "@heroui/react";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import React from "react";
 
