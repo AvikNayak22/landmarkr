@@ -38,6 +38,53 @@ export async function saveProperty(
     },
   });
 
+  return result;
+}
+
+export async function editProperty(
+  propertyId: number,
+  propertyData: AddPropertyInputType,
+  newImagesUrls: string[],
+  deletedImageIDs: number[]
+) {
+  const result = await prisma.property.update({
+    where: {
+      id: propertyId,
+    },
+    data: {
+      name: propertyData.name,
+      description: propertyData.description,
+      price: propertyData.price,
+      statusId: propertyData.statusId,
+      typeId: propertyData.typeId,
+      contact: {
+        update: {
+          ...propertyData.contact,
+        },
+      },
+      feature: {
+        update: {
+          ...propertyData.propertyFeature,
+        },
+      },
+      location: {
+        update: {
+          ...propertyData.location,
+        },
+      },
+      images: {
+        create: newImagesUrls.map((img) => ({
+          url: img,
+        })),
+        deleteMany: {
+          id: {
+            in: deletedImageIDs,
+          },
+        },
+      },
+    },
+  });
+
   console.log({ result });
 
   return result;

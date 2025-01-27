@@ -61,7 +61,7 @@ const Basic = (props: Props) => {
         isInvalid={!!errors.typeId}
         label="Type"
         selectionMode="single"
-        defaultSelectedKeys={[getValues().typeId.toString()]}
+        defaultSelectedKeys={[getValues().typeId?.toString()]}
       >
         {props.types.map((item) => (
           <SelectItem key={item.id} value={item.id}>
@@ -75,7 +75,7 @@ const Basic = (props: Props) => {
         isInvalid={!!errors.statusId}
         label="Status"
         selectionMode="single"
-        defaultSelectedKeys={[getValues().statusId.toString()]}
+        defaultSelectedKeys={[getValues().statusId?.toString()]}
       >
         {props.statuses.map((item) => (
           <SelectItem key={item.id} value={item.id}>

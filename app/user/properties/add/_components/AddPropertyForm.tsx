@@ -20,8 +20,8 @@ import { AddPropertyFormSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { uploadImages } from "../../../../../lib/upload";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { saveProperty } from "@/lib/actions/property";
-import { redirect } from "next/navigation";
+import { editProperty, saveProperty } from "@/lib/actions/property";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 const steps = [
@@ -60,6 +60,8 @@ interface Props {
 export type AddPropertyInputType = z.infer<typeof AddPropertyFormSchema>;
 
 const AddPropertyForm = ({ isEdit = false, ...props }: Props) => {
+  const router = useRouter();
+
   const methods = useForm<AddPropertyInputType>({
     resolver: zodResolver(AddPropertyFormSchema),
     defaultValues: {
@@ -88,14 +90,30 @@ const AddPropertyForm = ({ isEdit = false, ...props }: Props) => {
 
     try {
       if (user?.id) {
-        await saveProperty(data, imageUrls, user.id);
-        toast.success("Property Added!");
-        redirect("/user/properties");
+        if (isEdit && props.property) {
+          const deletedImageIDs = props.property?.images
+            .filter((item) => !savedImagesUrl.includes(item))
+            .map((item) => item.id);
+
+          await editProperty(
+            props.property?.id,
+            data,
+            imageUrls,
+            deletedImageIDs
+          );
+
+          toast.success("Property Updated!");
+        } else {
+          await saveProperty(data, imageUrls, user.id);
+          toast.success("Property Added!");
+        }
       } else {
         console.error("User ID is undefined");
       }
     } catch (err) {
       console.error({ err });
+    } finally {
+      router.push("/user/properties");
     }
   };
 

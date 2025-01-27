@@ -13,6 +13,7 @@ const Contact = ({ prev, className }: Props) => {
   const {
     register,
     formState: { errors },
+    getValues,
   } = useFormContext<AddPropertyInputType>();
 
   return (
@@ -24,18 +25,21 @@ const Contact = ({ prev, className }: Props) => {
         errorMessage={errors.contact?.name?.message}
         isInvalid={!!errors.contact?.name}
         label="Contact Name"
+        defaultValue={getValues("contact.name")}
       />
       <Input
         {...register("contact.phone")}
         errorMessage={errors.contact?.phone?.message}
         isInvalid={!!errors.contact?.phone}
         label="Phone"
+        defaultValue={getValues("contact.phone")}
       />
       <Input
         {...register("contact.email")}
         errorMessage={errors.contact?.email?.message}
         isInvalid={!!errors.contact?.email}
         label="Email"
+        defaultValue={getValues("contact.email")}
       />
 
       <div className="flex justify-center col-span-3 gap-3">

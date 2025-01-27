@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { Karla } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./components/providers";
 import Appbar from "@/app/components/Appbar";
 import SignInPanel from "./components/SignInPanel";
 import { ToastContainer } from "react-toastify";
 
-const karla = Karla({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -23,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${karla.className} antialiased`}>
+      <body className={`${inter.className} antialiased`}>
         <Providers>
           <Appbar>
             <SignInPanel />
