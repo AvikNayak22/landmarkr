@@ -3,7 +3,12 @@
 import React, { useState } from "react";
 import Stepper from "./Stepper";
 import Basic from "./Basic";
-import { Prisma, PropertyStatus, PropertyType } from "@prisma/client";
+import {
+  Prisma,
+  PropertyImage,
+  PropertyStatus,
+  PropertyType,
+} from "@prisma/client";
 import { cn } from "@heroui/react";
 import Location from "./Location";
 import Features from "./Features";
@@ -70,6 +75,10 @@ const AddPropertyForm = ({ isEdit = false, ...props }: Props) => {
   });
 
   const [images, setImages] = useState<File[]>([]);
+  const [savedImagesUrl, setSavedImagesUrl] = useState<PropertyImage[]>(
+    props.property?.images ?? []
+  );
+
   const [step, setStep] = useState(0);
 
   const { user } = useKindeBrowserClient();
@@ -117,6 +126,10 @@ const AddPropertyForm = ({ isEdit = false, ...props }: Props) => {
             className={cn({ hidden: step !== 3 })}
             images={images}
             setImages={setImages}
+            {...(!!props.property && {
+              savedImagesUrl: savedImagesUrl,
+              setSavedImagesUrl: setSavedImagesUrl,
+            })}
           />
           <Contact
             prev={() => setStep((prev) => prev - 1)}
