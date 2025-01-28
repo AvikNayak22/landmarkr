@@ -3,5 +3,5 @@ export default function middleware(req: Request) {
   return withAuth(req);
 }
 export const config = {
-  matcher: ["/user/profile"],
+  matcher: ["/user/:path*"],
 };
