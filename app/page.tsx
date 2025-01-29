@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import PropertyCard from "./components/PropertyCard";
 import PropertyContainer from "./components/PropertyContainer";
+import Search from "./components/Search";
 
 const PAGE_SIZE = 10;
 
@@ -12,6 +13,8 @@ interface Props {
 
 export default async function Home({ searchParams }: Props) {
   const pagenum = searchParams.pagenum ?? 0;
+
+  const query = searchParams.query ?? "";
 
   const propertiesPromise = prisma.property.findMany({
     select: {
@@ -30,11 +33,26 @@ export default async function Home({ searchParams }: Props) {
         },
       },
     },
+    ...(!!query && {
+      where: {
+        name: {
+          contains: String(query),
+        },
+      },
+    }),
     skip: +pagenum * PAGE_SIZE,
     take: PAGE_SIZE,
   });
 
-  const totalPropertiesPromise = prisma.property.count();
+  const totalPropertiesPromise = prisma.property.count({
+    ...(!!query && {
+      where: {
+        name: {
+          contains: String(query),
+        },
+      },
+    }),
+  });
 
   const [properties, totalProperties] = await Promise.all([
     propertiesPromise,
@@ -45,6 +63,7 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <div>
+      <Search />
       <PropertyContainer totalPages={totalPages} currentPage={+pagenum}>
         {properties.map((propertyItem) => (
           <PropertyCard key={propertyItem.id} property={propertyItem} />
