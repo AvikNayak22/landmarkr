@@ -1,15 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
-import {
-  Button,
-  Card,
-  cn,
-  Input,
-  Select,
-  SelectItem,
-  Textarea,
-} from "@heroui/react";
-import { PropertyType, PropertyStatus } from "@prisma/client";
 import { useFormContext } from "react-hook-form";
+import { PropertyStatus, PropertyType } from "@prisma/client";
 import { AddPropertyInputType } from "./AddPropertyForm";
 
 interface Props {
@@ -26,6 +17,7 @@ const Basic = (props: Props) => {
     trigger,
     getValues,
   } = useFormContext<AddPropertyInputType>();
+
   const handleNext = async () => {
     if (await trigger(["name", "description", "typeId", "statusId", "price"])) {
       props.next();
@@ -33,83 +25,122 @@ const Basic = (props: Props) => {
   };
 
   return (
-    <Card
-      className={cn(
-        "p-2 gap-3 grid grid-cols-1 md:grid-cols-3",
-        props.className
-      )}
-    >
-      <Input
-        {...register("name")}
-        errorMessage={errors.name?.message}
-        isInvalid={!!errors.name}
-        label="Name"
-        defaultValue={getValues().name}
-        className="md:col-span-2"
-      />
-      <Textarea
-        {...register("description")}
-        errorMessage={errors.description?.message}
-        isInvalid={!!errors.description}
-        label="Description"
-        defaultValue={getValues().description}
-        className="md:col-span-3"
-      />
-      <Select
-        {...register("typeId")}
-        errorMessage={errors.typeId?.message}
-        isInvalid={!!errors.typeId}
-        label="Type"
-        selectionMode="single"
-        defaultSelectedKeys={[getValues().typeId?.toString()]}
-      >
-        {props.types.map((item) => (
-          <SelectItem key={item.id} value={item.id}>
-            {item.value}
-          </SelectItem>
-        ))}
-      </Select>
-      <Select
-        {...register("statusId")}
-        errorMessage={errors.statusId?.message}
-        isInvalid={!!errors.statusId}
-        label="Status"
-        selectionMode="single"
-        defaultSelectedKeys={[getValues().statusId?.toString()]}
-      >
-        {props.statuses.map((item) => (
-          <SelectItem key={item.id} value={item.id}>
-            {item.value}
-          </SelectItem>
-        ))}
-      </Select>
-      <Input
-        {...register("price")}
-        errorMessage={errors.price?.message}
-        isInvalid={!!errors.price}
-        label="Price"
-        name="price"
-        defaultValue={getValues().price.toString()}
-      />
-      <div className="flex justify-center col-span-3 gap-3">
-        <Button
-          isDisabled
-          startContent={<ChevronLeftIcon className="w-6" />}
-          color="primary"
-          className="w-36"
-        >
-          Previous
-        </Button>
-        <Button
-          endContent={<ChevronRightIcon className="w-6" />}
-          color="primary"
-          className="w-36"
-          onClick={handleNext}
-        >
-          Next
-        </Button>
+    <div className={`bg-white rounded-lg shadow-md ${props.className}`}>
+      <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="md:col-span-3">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Name
+          </label>
+          <input
+            {...register("name")}
+            type="text"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Property Name"
+          />
+          {errors.name && (
+            <span className="text-sm text-red-500 mt-1">
+              {errors.name.message}
+            </span>
+          )}
+        </div>
+
+        <div className="md:col-span-3">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Description
+          </label>
+          <textarea
+            {...register("description")}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[100px]"
+            placeholder="Property Description"
+          />
+          {errors.description && (
+            <span className="text-sm text-red-500 mt-1">
+              {errors.description.message}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Type
+          </label>
+          <select
+            {...register("typeId")}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            defaultValue={getValues().typeId?.toString()}
+          >
+            <option value="">Select Type</option>
+            {props.types.map((item) => (
+              <option key={item.id} value={item.id?.toString()}>
+                {item.value}
+              </option>
+            ))}
+          </select>
+          {errors.typeId && (
+            <span className="text-sm text-red-500 mt-1">
+              {errors.typeId.message}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Status
+          </label>
+          <select
+            {...register("statusId")}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            defaultValue={getValues().statusId?.toString()}
+          >
+            <option value="">Select Status</option>
+            {props.statuses.map((item) => (
+              <option key={item.id} value={item.id?.toString()}>
+                {item.value}
+              </option>
+            ))}
+          </select>
+          {errors.statusId && (
+            <span className="text-sm text-red-500 mt-1">
+              {errors.statusId.message}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Price
+          </label>
+          <input
+            {...register("price")}
+            type="number"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter price"
+          />
+          {errors.price && (
+            <span className="text-sm text-red-500 mt-1">
+              {errors.price.message}
+            </span>
+          )}
+        </div>
+
+        <div className="flex justify-center items-center gap-4 md:col-span-3">
+          <button
+            disabled
+            className="flex items-center justify-center w-36 px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-400 cursor-not-allowed"
+          >
+            <ChevronLeftIcon className="w-4 h-4 mr-2" />
+            Previous
+          </button>
+          <button
+            onClick={handleNext}
+            className="flex items-center justify-center w-36 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Next
+            <ChevronRightIcon className="w-4 h-4 ml-2" />
+          </button>
+        </div>
       </div>
-    </Card>
+    </div>
   );
 };
 

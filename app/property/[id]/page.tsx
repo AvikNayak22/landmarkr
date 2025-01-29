@@ -1,7 +1,6 @@
 import { ImagesSlider } from "@/app/components/imageSlider";
 import PageTitle from "@/app/components/PageTitle";
 import prisma from "@/lib/prisma";
-import { Card } from "@heroui/react";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -49,7 +48,7 @@ const PropertyPage = async ({ params }: Props) => {
               {property.description}
             </p>
           </div>
-          <Card className="p-5 flex flex-col gap-1 ">
+          <div className="p-5 flex flex-col gap-1 border rounded-lg shadow-sm">
             <Title title="Features" />
             <Attribute label="Bedrooms" value={property.feature?.bedrooms} />
             <Attribute label="Bathrooms" value={property.feature?.bathrooms} />
@@ -72,7 +71,7 @@ const PropertyPage = async ({ params }: Props) => {
             <Attribute label="Owner name" value={property.contact?.name} />
             <Attribute label="Email" value={property.contact?.email} />
             <Attribute label="Phone" value={property.contact?.phone} />
-          </Card>
+          </div>
         </div>
       </div>
     </div>

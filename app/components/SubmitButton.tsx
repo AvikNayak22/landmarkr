@@ -1,15 +1,18 @@
 "use client";
 
-import { Button, ButtonProps } from "@heroui/react";
 import { useFormStatus } from "react-dom";
 
-const SubmitButton = (props: ButtonProps) => {
+const SubmitButton = ({ className, ...props }) => {
   const { pending } = useFormStatus();
 
   return (
-    <Button {...props} disabled={pending} isLoading={pending}>
-      Delete
-    </Button>
+    <button
+      {...props}
+      disabled={pending}
+      className={`px-4 py-2 bg-red-600 text-white rounded disabled:opacity-50 ${className}`}
+    >
+      {pending ? "Deleting..." : "Delete"}
+    </button>
   );
 };
 

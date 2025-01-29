@@ -1,5 +1,4 @@
 import { NoSymbolIcon } from "@heroicons/react/16/solid";
-import React from "react";
 
 const UnauthorizedPage = () => {
   return (

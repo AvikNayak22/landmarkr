@@ -34,8 +34,6 @@ export async function uploadAvatar(image: File) {
     .from("avatars")
     .upload(`${image.name}_${Date.now()}`, image);
 
-  console.log({ data });
-
   const urlData = await supabase.storage
     .from("avatars")
     .getPublicUrl(data.data?.path ?? "");

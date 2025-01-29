@@ -1,6 +1,3 @@
-"use client";
-
-import { Button } from "@heroui/react";
 import Link from "next/link";
 import React from "react";
 
@@ -16,9 +13,9 @@ const PropertiesLayout = ({ children, modalDelete }: Props) => {
         <h2 className="text-white text-xl font-semibold px-2 ">
           User Properties
         </h2>
-        <Button color="secondary">
+        <button className="bg-secondary-500 text-white px-4 py-2 rounded hover:bg-secondary-600">
           <Link href="/user/properties/add">Add Property</Link>
-        </Button>
+        </button>
       </div>
       {children}
       {modalDelete}

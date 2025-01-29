@@ -9,7 +9,6 @@ import {
   PropertyStatus,
   PropertyType,
 } from "@prisma/client";
-import { cn } from "@heroui/react";
 import Location from "./Location";
 import Features from "./Features";
 import Picture from "./Picture";
@@ -81,7 +80,7 @@ const AddPropertyForm = ({ isEdit = false, ...props }: Props) => {
     props.property?.images ?? []
   );
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(4);
 
   const { user } = useKindeBrowserClient();
 
@@ -123,7 +122,7 @@ const AddPropertyForm = ({ isEdit = false, ...props }: Props) => {
       <FormProvider {...methods}>
         <form className="mt-3 p-2" onSubmit={methods.handleSubmit(onSubmit)}>
           <Basic
-            className={cn({ hidden: step !== 0 })}
+            className={step !== 0 ? "hidden" : ""}
             next={() => setStep((prev) => prev + 1)}
             types={props.types}
             statuses={props.statuses}
@@ -131,17 +130,17 @@ const AddPropertyForm = ({ isEdit = false, ...props }: Props) => {
           <Location
             next={() => setStep((prev) => prev + 1)}
             prev={() => setStep((prev) => prev - 1)}
-            className={cn({ hidden: step !== 1 })}
+            className={step !== 1 ? "hidden" : ""}
           />
           <Features
             next={() => setStep((prev) => prev + 1)}
             prev={() => setStep((prev) => prev - 1)}
-            className={cn({ hidden: step !== 2 })}
+            className={step !== 2 ? "hidden" : ""}
           />
           <Picture
             next={() => setStep((prev) => prev + 1)}
             prev={() => setStep((prev) => prev - 1)}
-            className={cn({ hidden: step !== 3 })}
+            className={step !== 3 ? "hidden" : ""}
             images={images}
             setImages={setImages}
             {...(!!props.property && {
@@ -151,7 +150,7 @@ const AddPropertyForm = ({ isEdit = false, ...props }: Props) => {
           />
           <Contact
             prev={() => setStep((prev) => prev - 1)}
-            className={cn({ hidden: step !== 4 })}
+            className={step !== 4 ? "hidden" : ""}
           />
         </form>
       </FormProvider>

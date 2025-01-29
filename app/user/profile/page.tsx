@@ -1,57 +1,48 @@
-"use client";
-
 import PageTitle from "@/app/components/PageTitle";
 import { getUserById } from "@/lib/actions/user";
-import { Avatar, Card } from "@heroui/react";
+import Image from "next/image";
 import SectionTitle from "./_components/SectionTitle";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { ReactNode, useEffect, useState } from "react";
-import { User } from "@prisma/client";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { ReactNode } from "react";
 import UploadAvatar from "./_components/UploadAvatar";
 
-const ProfilePage = () => {
-  const { getUser } = useKindeBrowserClient();
-  const user = getUser();
-  const [dbUser, setDbUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      if (user) {
-        const userData = await getUserById(user.id);
-        setDbUser(userData);
-      }
-    };
-    fetchUser();
-  }, [user]);
+const ProfilePage = async () => {
+  const { getUser } = await getKindeServerSession();
+  const user = await getUser();
+  const dbUser = await getUserById(user ? user.id : "");
 
   return (
     <div>
       <PageTitle title="My Profile" linkCaption="Back to homepage" href="/" />
-      <Card className="m-4 p-4 ">
+      <div className="m-6 p-6 bg-white rounded-xl shadow-lg flex flex-col gap-6">
         <SectionTitle title="Basic Information" />
-        <div className="flex">
-          <div className="flex flex-col items-center justify-start">
-            <Avatar
-              className="w-20 h-20 "
-              src={dbUser?.avatarUrl ?? "/profile.png"}
-            />
+        <div className="flex justify-center md:justify-start">
+          <div className="flex flex-col items-center gap-3">
+            <div className="relative w-24 h-24 rounded-full overflow-hidden ring-4 ring-slate-100 shadow-md">
+              <Image
+                src={dbUser?.avatarUrl ?? "/profile.png"}
+                alt="Profile"
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
             <UploadAvatar userId={dbUser?.id ?? ""} />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Attribute
             title="Name"
             value={`${dbUser?.firstName} ${dbUser?.lastName}`}
           />
-          <Attribute title="Email" value={`${dbUser?.email}`} />
+          <Attribute title="Email" value={dbUser?.email} />
           <Attribute
             title="Registered On"
-            value={`${dbUser?.createdAt?.toLocaleDateString()}`}
+            value={dbUser?.createdAt.toLocaleDateString()}
           />
-          <Attribute title="Properties posted" value={1} />
+          <Attribute title="Properties Posted" value={1} />
         </div>
-      </Card>
+      </div>{" "}
     </div>
   );
 };

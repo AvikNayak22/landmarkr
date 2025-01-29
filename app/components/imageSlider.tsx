@@ -1,6 +1,5 @@
 "use client";
 
-import { Card, cn } from "@heroui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
 
@@ -71,7 +70,7 @@ export const ImagesSlider = ({
     window.addEventListener("keydown", handleKeyDown);
 
     // autoplay
-    let interval: any;
+    let interval: NodeJS.Timeout;
     if (autoplay) {
       interval = setInterval(() => {
         handleNext();
@@ -118,11 +117,8 @@ export const ImagesSlider = ({
   const areImagesLoaded = loadedImages.length > 0;
 
   return (
-    <Card
-      className={cn(
-        "overflow-hidden h-full w-full relative flex items-center justify-center",
-        className
-      )}
+    <div
+      className={`overflow-hidden h-full w-full relative flex items-center justify-center ${className}`}
       style={{
         perspective: "1000px",
       }}
@@ -130,7 +126,7 @@ export const ImagesSlider = ({
       {areImagesLoaded && children}
       {areImagesLoaded && overlay && (
         <div
-          className={cn("absolute inset-0 bg-black/60 z-40", overlayClassName)}
+          className={`absolute inset-0 bg-black/60 z-40 ${overlayClassName}`}
         />
       )}
 
@@ -147,6 +143,6 @@ export const ImagesSlider = ({
           />
         </AnimatePresence>
       )}
-    </Card>
+    </div>
   );
 };

@@ -1,84 +1,86 @@
 "use client";
 
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Image,
-  useDisclosure,
-} from "@heroui/react";
-
 import { PencilIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 import FileInput from "@/app/components/FileUpload";
 import { uploadAvatar } from "@/lib/upload";
 import { updateUserAvatar } from "@/lib/actions/user";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const UploadAvatar = ({ userId }: { userId: string }) => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [image, setImage] = useState<File>();
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+
+  const handleClose = () => setIsModalOpen(false);
+  const handleOpen = () => setIsModalOpen(true);
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+
+    if (!image) {
+      handleClose();
+      return;
+    }
+
+    const avatarUrl = await uploadAvatar(image);
+    await updateUserAvatar(avatarUrl, userId);
+    router.refresh();
+    setIsSubmitting(false);
+    handleClose();
+  };
 
   return (
     <div>
-      <Button variant="light" onPress={onOpen}>
+      <button className="p-2 rounded-md hover:bg-gray-100" onClick={handleOpen}>
         <PencilIcon className="w-6 text-slate-400 hover:text-primary transition-colors" />
-      </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Upload Avatar
-              </ModalHeader>
-              <ModalBody>
+      </button>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full">
+            <div className="flex flex-col gap-4">
+              <h2 className="text-xl font-semibold">Upload Avatar</h2>
+
+              <div className="space-y-4">
                 <FileInput
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setImage(e.target.files?.[0])
                   }
                 />
                 {image && (
-                  <Image src={URL.createObjectURL(image)} alt="image preview" />
+                  <div className="relative w-full h-48">
+                    <Image
+                      src={URL.createObjectURL(image)}
+                      alt="image preview"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                 )}
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Cancel
-                </Button>
-                <Button
-                  isLoading={isSubmitting}
-                  color="primary"
-                  onPress={async () => {
-                    setIsSubmitting(true);
+              </div>
 
-                    if (!image) {
-                      onClose();
-                      return;
-                    }
-
-                    const avatarUrl = await uploadAvatar(image);
-
-                    await updateUserAvatar(avatarUrl, userId);
-
-                    router.refresh();
-
-                    setIsSubmitting(false);
-
-                    onClose();
-                  }}
+              <div className="flex justify-end gap-2 mt-4">
+                <button
+                  className="px-4 py-2 text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                  onClick={handleClose}
                 >
-                  Change Avatar
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+                  Cancel
+                </button>
+                <button
+                  className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors disabled:opacity-50"
+                  onClick={handleSubmit}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Loading..." : "Change Avatar"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

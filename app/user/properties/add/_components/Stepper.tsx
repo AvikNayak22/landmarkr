@@ -1,4 +1,3 @@
-import { cn } from "@heroui/react";
 import React from "react";
 
 interface Props {
@@ -8,45 +7,36 @@ interface Props {
   className?: string;
 }
 
-const Stepper = (props: Props) => {
+const Stepper = ({ items, activeItem, setActiveItem, className }: Props) => {
   return (
-    <div className={cn("flex items-center justify-around", props.className)}>
-      {props.items.map((item, index) => (
+    <div className={`flex items-center justify-around ${className}`}>
+      {items.map((item, index) => (
         <React.Fragment key={index}>
           <div className="flex flex-col items-center">
             <div
-              className={cn(
-                "rounded-full w-6 h-6 flex justify-center items-center transition",
-                {
-                  "bg-primary-400 text-white": index === props.activeItem,
-                  "bg-gray-400 text-white": index > props.activeItem,
-                  "bg-primary-700 text-white": index < props.activeItem,
-                  "cursor-pointer": index <= props.activeItem,
-                }
-              )}
-              {...(index < props.activeItem
-                ? {
-                    onClick: () => props.setActiveItem(index),
-                  }
-                : {})}
+              className={`rounded-full w-6 h-6 flex justify-center items-center transition cursor-pointer 
+                ${index === activeItem ? "bg-blue-500 text-white" : ""} 
+                ${index > activeItem ? "bg-gray-400 text-white" : ""} 
+                ${index < activeItem ? "bg-blue-700 text-white" : ""}
+              `}
+              onClick={() => index < activeItem && setActiveItem(index)}
             >
               {index + 1}
             </div>
             <p>{item.label}</p>
           </div>
 
-          {index !== props.items.length - 1 && (
+          {index !== items.length - 1 && (
             <div
-              className={cn(
-                `border h-0 w-full -mt-5 relative 
-            after:absolute after:left-0 after:top-0 after:border 
-            after:transition-all after:duration-300 after:ease-in`,
-                {
-                  "after:w-full after:border-primary-400":
-                    index < props.activeItem,
-                  "after:w-0": index >= props.activeItem,
+              className={`border h-0 w-full -mt-5 relative 
+                after:absolute after:left-0 after:top-0 after:border 
+                after:transition-all after:duration-300 after:ease-in
+                ${
+                  index < activeItem
+                    ? "after:w-full after:border-blue-500"
+                    : "after:w-0"
                 }
-              )}
+              `}
             ></div>
           )}
         </React.Fragment>

@@ -1,5 +1,4 @@
 import FileInput from "@/app/components/FileUpload";
-import { Button, Card, cn } from "@heroui/react";
 import React from "react";
 import PictureCard from "./PictureCard";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
@@ -17,13 +16,13 @@ interface Props {
 
 const Picture = (props: Props) => {
   return (
-    <Card className={cn("p-3 ", props.className)}>
+    <div className={`p-3 ${props.className}`}>
       <FileInput
         onSelect={(e: React.ChangeEvent<HTMLInputElement>) =>
           props.setImages([...e.target.files!, ...props.images])
         }
       />
-      <div className="flex gap-3 flex-wrap">
+      <div className="flex gap-3 flex-wrap mt-4">
         {!!props.savedImagesUrl &&
           !!props.setSavedImagesUrl &&
           props.savedImagesUrl.map((image, index) => {
@@ -62,24 +61,22 @@ const Picture = (props: Props) => {
       </div>
 
       <div className="flex justify-center col-span-2 gap-3 mt-3">
-        <Button
-          startContent={<ChevronLeftIcon className="w-6" />}
-          color="primary"
-          className="w-36"
+        <button
+          className="flex items-center justify-center w-36 p-2 bg-blue-500 text-white rounded"
           onClick={props.prev}
         >
+          <ChevronLeftIcon className="w-6 h-6" />
           Previous
-        </Button>
-        <Button
-          endContent={<ChevronRightIcon className="w-6" />}
-          color="primary"
-          className="w-36"
+        </button>
+        <button
+          className="flex items-center justify-center w-36 p-2 bg-blue-500 text-white rounded"
           onClick={props.next}
         >
           Next
-        </Button>
+          <ChevronRightIcon className="w-6 h-6" />
+        </button>
       </div>
-    </Card>
+    </div>
   );
 };
 

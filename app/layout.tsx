@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./components/providers";
 import Appbar from "@/app/components/Appbar";
 import SignInPanel from "./components/SignInPanel";
 import { ToastContainer } from "react-toastify";
@@ -23,13 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <Providers>
-          <Appbar>
-            <SignInPanel />
-          </Appbar>
-          {children}
-          <ToastContainer />
-        </Providers>
+        <Appbar>
+          <SignInPanel />
+        </Appbar>
+        {children}
+        <ToastContainer />
       </body>
     </html>
   );

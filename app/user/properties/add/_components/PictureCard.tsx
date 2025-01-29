@@ -1,5 +1,5 @@
 import { TrashIcon } from "@heroicons/react/16/solid";
-import { Card, Image } from "@heroui/react";
+import Image from "next/image";
 import React from "react";
 
 interface Props {
@@ -10,17 +10,20 @@ interface Props {
 
 const PictureCard = ({ src, onDelete, index }: Props) => {
   return (
-    <Card className="flex flex-col items-center">
-      <Image
-        src={src}
-        className="w-36 h-36 object-contain"
-        alt="Property Image"
-      />
+    <div className="flex flex-col items-center border border-gray-200 p-4 rounded-md shadow-md">
+      <div className="w-36 h-36 relative">
+        <Image
+          src={src}
+          alt="Property Image"
+          layout="fill"
+          objectFit="contain"
+        />
+      </div>
 
-      <button className="mb-2" onClick={() => onDelete(index)}>
-        <TrashIcon className="text-danger-400 w-4" />
+      <button className="mt-2" onClick={() => onDelete(index)}>
+        <TrashIcon className="text-red-500 w-6 h-6" />
       </button>
-    </Card>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Card, Image } from "@heroui/react";
+import Image from "next/image";
 import { Prisma } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
@@ -26,13 +26,15 @@ interface Props {
 
 const PropertyCard = ({ property }: Props) => {
   return (
-    <Card className="w-72 flex flex-col hover:scale-105" shadow="md">
-      <Image
-        radius="none"
-        src={property.images[0].url}
-        alt={property.name}
-        className="object-fill w-96 h-48 "
-      />
+    <div className="w-72 flex flex-col hover:scale-105 shadow-md rounded-lg overflow-hidden">
+      <div className="relative w-96 h-48">
+        <Image
+          fill
+          src={property.images[0].url}
+          alt={property.name}
+          className="object-fill"
+        />
+      </div>
 
       <div className="flex flex-col mt-auto">
         <div className="p-4">
@@ -51,7 +53,7 @@ const PropertyCard = ({ property }: Props) => {
           </Link>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 

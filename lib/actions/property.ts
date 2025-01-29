@@ -85,8 +85,6 @@ export async function editProperty(
     },
   });
 
-  console.log({ result });
-
   return result;
 }
 

@@ -1,51 +1,34 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { Button } from "@heroui/react";
 import {
-  useKindeBrowserClient,
   LoginLink,
   RegisterLink,
-} from "@kinde-oss/kinde-auth-nextjs";
-import { User } from "@prisma/client";
+  getKindeServerSession,
+} from "@kinde-oss/kinde-auth-nextjs/server";
 import UserProfilePanel from "./UserProfilePanel";
-import { getUserById } from "@/lib/actions/user";
+import prisma from "@/lib/prisma";
 
-const SignInPanel = () => {
-  const { isAuthenticated, getUser } = useKindeBrowserClient();
-  const [dbUser, setDbUser] = useState<User | null>(null);
+const signInPanel = async () => {
+  const { isAuthenticated, getUser } = await getKindeServerSession();
+  if (await isAuthenticated()) {
+    const user = await getUser();
+    const dbUser = await prisma.user.findUnique({
+      where: {
+        id: user?.id,
+      },
+    });
 
-  const user = getUser();
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      if (isAuthenticated && user?.id) {
-        try {
-          const userData = await getUserById(user.id);
-          setDbUser(userData);
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
-      }
-    };
-
-    fetchUser();
-  }, [isAuthenticated, user?.id]);
-
-  if (isAuthenticated) {
-    return <>{dbUser! && <UserProfilePanel user={dbUser} />}</>;
+    return <>{!!dbUser && <UserProfilePanel user={dbUser} />}</>;
   }
 
   return (
     <div className="flex gap-3">
-      <Button color="primary">
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         <LoginLink>Sign In</LoginLink>
-      </Button>
-      <Button color="primary">
+      </button>
+      <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
         <RegisterLink>Sign Up</RegisterLink>
-      </Button>
+      </button>
     </div>
   );
 };
 
-export default SignInPanel;
+export default signInPanel;

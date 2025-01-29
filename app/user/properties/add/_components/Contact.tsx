@@ -1,6 +1,4 @@
 import { ChevronLeftIcon, PlusCircleIcon } from "@heroicons/react/16/solid";
-import { Button, Card, cn, Input } from "@heroui/react";
-import React from "react";
 import { useFormContext } from "react-hook-form";
 import { AddPropertyInputType } from "./AddPropertyForm";
 
@@ -17,50 +15,74 @@ const Contact = ({ prev, className }: Props) => {
   } = useFormContext<AddPropertyInputType>();
 
   return (
-    <Card
-      className={cn("grid grid-cols-1 md:grid-cols-3 gap-3 p-2", className)}
+    <div
+      className={`bg-white rounded-lg shadow-md ${className} grid grid-cols-1 md:grid-cols-3 gap-3 p-2`}
     >
-      <Input
-        {...register("contact.name")}
-        errorMessage={errors.contact?.name?.message}
-        isInvalid={!!errors.contact?.name}
-        label="Contact Name"
-        defaultValue={getValues("contact.name")}
-      />
-      <Input
-        {...register("contact.phone")}
-        errorMessage={errors.contact?.phone?.message}
-        isInvalid={!!errors.contact?.phone}
-        label="Phone"
-        defaultValue={getValues("contact.phone")}
-      />
-      <Input
-        {...register("contact.email")}
-        errorMessage={errors.contact?.email?.message}
-        isInvalid={!!errors.contact?.email}
-        label="Email"
-        defaultValue={getValues("contact.email")}
-      />
+      <div className="flex flex-col">
+        <label className="mb-1">Contact Name</label>
+        <input
+          {...register("contact.name")}
+          className={`border rounded-md p-2 ${
+            errors.contact?.name ? "border-red-500" : "border-gray-300"
+          }`}
+          defaultValue={getValues("contact.name")}
+        />
+        {errors.contact?.name && (
+          <span className="text-red-500 text-sm">
+            {errors.contact?.name?.message}
+          </span>
+        )}
+      </div>
+
+      <div className="flex flex-col">
+        <label className="mb-1">Phone</label>
+        <input
+          {...register("contact.phone")}
+          className={`border rounded-md p-2 ${
+            errors.contact?.phone ? "border-red-500" : "border-gray-300"
+          }`}
+          defaultValue={getValues("contact.phone")}
+        />
+        {errors.contact?.phone && (
+          <span className="text-red-500 text-sm">
+            {errors.contact?.phone?.message}
+          </span>
+        )}
+      </div>
+
+      <div className="flex flex-col">
+        <label className="mb-1">Email</label>
+        <input
+          {...register("contact.email")}
+          className={`border rounded-md p-2 ${
+            errors.contact?.email ? "border-red-500" : "border-gray-300"
+          }`}
+          defaultValue={getValues("contact.email")}
+        />
+        {errors.contact?.email && (
+          <span className="text-red-500 text-sm">
+            {errors.contact?.email?.message}
+          </span>
+        )}
+      </div>
 
       <div className="flex justify-center col-span-3 gap-3">
-        <Button
-          startContent={<ChevronLeftIcon className="w-6" />}
-          color="primary"
-          className="w-36"
+        <button
+          className="flex items-center justify-center gap-2 bg-blue-500 text-white rounded-md px-4 py-2 w-36 hover:bg-blue-600"
           onClick={prev}
         >
+          <ChevronLeftIcon className="w-6" />
           Previous
-        </Button>
-        <Button
-          endContent={<PlusCircleIcon className="w-6" />}
-          color="secondary"
-          className="w-36"
+        </button>
+        <button
+          className="flex items-center justify-center gap-2 bg-green-500 text-white rounded-md px-4 py-2 w-36 hover:bg-green-600"
           type="submit"
         >
           Save
-        </Button>
+          <PlusCircleIcon className="w-6" />
+        </button>
       </div>
-    </Card>
+    </div>
   );
 };
 
