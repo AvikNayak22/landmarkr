@@ -1,7 +1,7 @@
 import FileInput from "@/app/components/FileUpload";
 import React from "react";
 import PictureCard from "./PictureCard";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { PropertyImage } from "@prisma/client";
 
 interface Props {
@@ -65,7 +65,7 @@ const Picture = (props: Props) => {
           className="flex items-center justify-center w-36 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
           onClick={props.prev}
         >
-          <ChevronLeftIcon className="w-6 h-6" />
+          <FaChevronLeft className="w-6 h-6" />
           Previous
         </button>
         <button
@@ -73,7 +73,7 @@ const Picture = (props: Props) => {
           onClick={props.next}
         >
           Next
-          <ChevronRightIcon className="w-6 h-6" />
+          <FaChevronRight className="w-6 h-6" />
         </button>
       </div>
     </div>

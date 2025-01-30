@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useFormContext } from "react-hook-form";
 import { PropertyStatus, PropertyType } from "@prisma/client";
 import { AddPropertyInputType } from "./AddPropertyForm";
@@ -128,7 +128,7 @@ const Basic = (props: Props) => {
             disabled
             className="flex items-center justify-center w-36 px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-400 cursor-not-allowed"
           >
-            <ChevronLeftIcon className="w-4 h-4 mr-2" />
+            <FaChevronLeft className="w-4 h-4 mr-2" />
             Previous
           </button>
           <button
@@ -136,7 +136,7 @@ const Basic = (props: Props) => {
             className="flex items-center justify-center w-36 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
           >
             Next
-            <ChevronRightIcon className="w-4 h-4 ml-2" />
+            <FaChevronRight className="w-4 h-4 ml-2" />
           </button>
         </div>
       </div>

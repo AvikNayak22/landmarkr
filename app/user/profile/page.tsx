@@ -14,7 +14,7 @@ const ProfilePage = async () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <PageTitle title="My Profile" linkCaption="Back to Home Page" href="/" />
-      <div className="mx-2 mt-4 p-6 bg-white rounded-xl shadow-lg flex flex-col gap-6">
+      <div className="mx-2 mt-4 p-6 border rounded-xl shadow-md flex flex-col gap-6">
         <SectionTitle title="Basic Information" />
         <div className="flex justify-center md:justify-start">
           <div className="flex flex-col items-center gap-3">
@@ -30,7 +30,7 @@ const ProfilePage = async () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <Attribute
             title="Name"
             value={`${dbUser?.firstName} ${dbUser?.lastName}`}
@@ -51,7 +51,7 @@ export default ProfilePage;
 
 const Attribute = ({ title, value }: { title: string; value: ReactNode }) => {
   return (
-    <div className="flex flex-col text-sm p-4 bg-gray-100 rounded-lg shadow-sm">
+    <div className="flex flex-col text-sm bg-gray-100 p-4 border rounded-lg shadow-sm">
       <span className="text-slate-800 font-semibold">{title}</span>
       <span className="text-slate-600">{value}</span>
     </div>

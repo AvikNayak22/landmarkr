@@ -1,4 +1,4 @@
-import { TrashIcon } from "@heroicons/react/16/solid";
+import { FaTrashCan } from "react-icons/fa6";
 import Image from "next/image";
 import React from "react";
 
@@ -16,7 +16,7 @@ const PictureCard = ({ src, onDelete, index }: Props) => {
       </div>
 
       <button className="mt-2" onClick={() => onDelete(index)}>
-        <TrashIcon className="text-red-500 w-6 h-6" />
+        <FaTrashCan className="text-red-500 w-6 h-6" />
       </button>
     </div>
   );

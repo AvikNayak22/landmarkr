@@ -28,28 +28,36 @@ const PropertyPage = async ({ params }: Props) => {
   if (!property) return notFound();
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col overflow-y-auto mb-4">
       <PageTitle
         title="Property Details"
         href="/"
         linkCaption="Back to Properties"
       />
 
-      <div className="mx-4">
+      <div className="mx-4 flex-grow">
         <h2 className="text-3xl font-bold text-primary my-5">
           {property.name}
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="col-span-2">
-            <ImagesSlider images={property.images.map((img) => img.url)} />
-            <h2 className="text-2xl font-bold text-gray-700 mt-7">
-              {formatPrice(property.price)} / {property.status.value}
+          <div className="col-span-2 flex flex-col border shadow-md rounded-xl p-6">
+            <div className="flex-grow">
+              <ImagesSlider images={property.images.map((img) => img.url)} />
+            </div>
+
+            <h2 className="text-3xl font-semibold text-gray-900 mt-6">
+              {formatPrice(property.price)}
+              <span className="text-lg text-gray-600 font-medium">
+                {" "}
+                / {property.status.value}
+              </span>
             </h2>
-            <p className="text-base text-gray-600 mt-4 leading-relaxed">
+            <p className="text-lg text-gray-700 mt-4 leading-7">
               {property.description}
             </p>
           </div>
+
           <div className="p-6 flex flex-col gap-4 border rounded-lg shadow-md bg-white">
             <Title title="Features" />
             <Attribute label="Bedrooms" value={property.feature?.bedrooms} />

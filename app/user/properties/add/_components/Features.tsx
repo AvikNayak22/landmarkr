@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { AddPropertyInputType } from "./AddPropertyForm";
@@ -148,14 +148,14 @@ const Features = (props: Props) => {
           onClick={props.prev}
           className="flex items-center justify-center w-36 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
         >
-          <ChevronLeftIcon className="w-5 mr-2" /> Previous
+          <FaChevronLeft className="w-5 mr-2" /> Previous
         </button>
 
         <button
           onClick={handleNext}
           className="flex items-center justify-center w-36 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
         >
-          Next <ChevronRightIcon className="w-5 ml-2" />
+          Next <FaChevronRight className="w-5 ml-2" />
         </button>
       </div>
     </div>

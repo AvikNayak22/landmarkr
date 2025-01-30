@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { AddPropertyInputType } from "./AddPropertyForm";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 interface Props {
   next: () => void;
@@ -140,7 +140,7 @@ const Location = (props: Props) => {
             className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-md w-36 justify-center hover:bg-teal-700"
             onClick={props.prev}
           >
-            <ChevronLeftIcon className="w-5 h-5" />
+            <FaChevronLeft className="w-5 h-5" />
             Previous
           </button>
           <button
@@ -148,7 +148,7 @@ const Location = (props: Props) => {
             onClick={handleNext}
           >
             Next
-            <ChevronRightIcon className="w-5 h-5" />
+            <FaChevronRight className="w-5 h-5" />
           </button>
         </div>
       </div>

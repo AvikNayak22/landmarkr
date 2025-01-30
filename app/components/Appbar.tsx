@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import Link from "next/link";
-import { HomeModernIcon } from "@heroicons/react/16/solid";
+import { MdOutlineHomeWork } from "react-icons/md";
 
 interface Props {
   children: ReactNode;
@@ -18,7 +18,7 @@ const Appbar = ({ children }: Props) => {
             href="/"
             className="flex items-center text-teal-500 hover:text-teal-600 transition-colors space-x-2"
           >
-            <HomeModernIcon className="w-16 h-16" />
+            <MdOutlineHomeWork className="w-14 h-14" />
             <p className="text-lg font-semibold tracking-wide">LandMarkr</p>
           </Link>
 

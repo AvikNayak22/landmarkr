@@ -1,7 +1,9 @@
 "use client";
 
 import { formatPrice } from "@/lib/constants";
-import { EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/16/solid";
+import { MdModeEdit } from "react-icons/md";
+import { FaTrashCan } from "react-icons/fa6";
+import { IoMdEye } from "react-icons/io";
 import { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -74,7 +76,7 @@ const PropertiesTable = ({ properties, totalPages, currentPage }: Props) => {
                       href={`/property/${item.id}`}
                       className="group relative flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 transition-colors"
                     >
-                      <EyeIcon className="w-5 h-5 text-gray-600 group-hover:text-gray-800" />
+                      <IoMdEye className="w-5 h-5 text-gray-600 group-hover:text-gray-800" />
                       <span className="invisible group-hover:visible absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap">
                         View Details
                       </span>
@@ -83,7 +85,7 @@ const PropertiesTable = ({ properties, totalPages, currentPage }: Props) => {
                       href={`/user/properties/${item.id}/edit`}
                       className="group relative flex items-center justify-center w-8 h-8 rounded-full hover:bg-yellow-50 transition-colors"
                     >
-                      <PencilIcon className="w-5 h-5 text-yellow-600 group-hover:text-yellow-700" />
+                      <MdModeEdit className="w-5 h-5 text-yellow-600 group-hover:text-yellow-700" />
                       <span className="invisible group-hover:visible absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap">
                         Edit Property
                       </span>
@@ -92,7 +94,7 @@ const PropertiesTable = ({ properties, totalPages, currentPage }: Props) => {
                       href={`/user/properties/${item.id}/delete`}
                       className="group relative flex items-center justify-center w-8 h-8 rounded-full hover:bg-red-50 transition-colors"
                     >
-                      <TrashIcon className="w-5 h-5 text-red-600 group-hover:text-red-700" />
+                      <FaTrashCan className="w-5 h-5 text-red-600 group-hover:text-red-700" />
                       <span className="invisible group-hover:visible absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap">
                         Delete Property
                       </span>

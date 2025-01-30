@@ -1,4 +1,4 @@
-import { CheckIcon, ChevronLeftIcon } from "@heroicons/react/16/solid";
+import { FaChevronLeft, FaCheck } from "react-icons/fa";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { AddPropertyInputType } from "./AddPropertyForm";
@@ -68,13 +68,13 @@ const Contact = ({ prev, className }: Props) => {
           onClick={prev}
           className="flex items-center justify-center w-36 px-4 py-2 text-white bg-teal-600 rounded-lg hover:bg-teal-700 focus:outline-none"
         >
-          <ChevronLeftIcon className="w-6 mr-2" /> Previous
+          <FaChevronLeft className="w-6 mr-2" /> Previous
         </button>
         <button
           type="submit"
           className="flex items-center justify-center w-36 px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none"
         >
-          Save <CheckIcon className="w-6 ml-2" />
+          Save <FaCheck className="w-6 ml-2" />
         </button>
       </div>
     </div>

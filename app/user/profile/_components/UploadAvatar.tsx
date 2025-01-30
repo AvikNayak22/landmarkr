@@ -1,6 +1,6 @@
 "use client";
 
-import { PencilIcon } from "@heroicons/react/16/solid";
+import { MdModeEdit } from "react-icons/md";
 import { useState } from "react";
 import FileInput from "@/app/components/FileUpload";
 import { uploadAvatar } from "@/lib/upload";
@@ -35,7 +35,10 @@ const UploadAvatar = ({ userId }: { userId: string }) => {
   return (
     <div>
       <button className="p-2 rounded-md hover:bg-gray-100" onClick={handleOpen}>
-        <PencilIcon className="w-6 text-slate-400 hover:text-teal-500 transition-colors" />
+        <MdModeEdit
+          size={24}
+          className="w-6 text-slate-400 hover:text-teal-500 transition-colors"
+        />
       </button>
 
       {isModalOpen && (
