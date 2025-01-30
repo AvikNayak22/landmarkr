@@ -1,4 +1,5 @@
-import { ChevronLeftIcon, PlusCircleIcon } from "@heroicons/react/16/solid";
+import { CheckIcon, ChevronLeftIcon } from "@heroicons/react/16/solid";
+import React from "react";
 import { useFormContext } from "react-hook-form";
 import { AddPropertyInputType } from "./AddPropertyForm";
 
@@ -16,70 +17,64 @@ const Contact = ({ prev, className }: Props) => {
 
   return (
     <div
-      className={`bg-white rounded-lg shadow-md ${className} grid grid-cols-1 md:grid-cols-3 gap-3 p-2`}
+      className={`grid grid-cols-1 lg:grid-cols-3 gap-3 p-4 border rounded-lg shadow ${className}`}
     >
-      <div className="flex flex-col">
-        <label className="mb-1">Contact Name</label>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          Contact Name
+        </label>
         <input
           {...register("contact.name")}
-          className={`border rounded-md p-2 ${
+          defaultValue={getValues("contact.name")}
+          className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 ${
             errors.contact?.name ? "border-red-500" : "border-gray-300"
           }`}
-          defaultValue={getValues("contact.name")}
         />
         {errors.contact?.name && (
-          <span className="text-red-500 text-sm">
-            {errors.contact?.name?.message}
-          </span>
+          <p className="text-red-500 text-xs">{errors.contact.name.message}</p>
         )}
       </div>
 
-      <div className="flex flex-col">
-        <label className="mb-1">Phone</label>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Phone</label>
         <input
           {...register("contact.phone")}
-          className={`border rounded-md p-2 ${
+          defaultValue={getValues("contact.phone")}
+          className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 ${
             errors.contact?.phone ? "border-red-500" : "border-gray-300"
           }`}
-          defaultValue={getValues("contact.phone")}
         />
         {errors.contact?.phone && (
-          <span className="text-red-500 text-sm">
-            {errors.contact?.phone?.message}
-          </span>
+          <p className="text-red-500 text-xs">{errors.contact.phone.message}</p>
         )}
       </div>
 
-      <div className="flex flex-col">
-        <label className="mb-1">Email</label>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Email</label>
         <input
           {...register("contact.email")}
-          className={`border rounded-md p-2 ${
+          defaultValue={getValues("contact.email")}
+          className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 ${
             errors.contact?.email ? "border-red-500" : "border-gray-300"
           }`}
-          defaultValue={getValues("contact.email")}
         />
         {errors.contact?.email && (
-          <span className="text-red-500 text-sm">
-            {errors.contact?.email?.message}
-          </span>
+          <p className="text-red-500 text-xs">{errors.contact.email.message}</p>
         )}
       </div>
 
-      <div className="flex justify-center col-span-3 gap-3">
+      <div className="flex justify-center col-span-3 gap-3 mt-4">
         <button
-          className="flex items-center justify-center gap-2 bg-blue-500 text-white rounded-md px-4 py-2 w-36 hover:bg-blue-600"
           onClick={prev}
+          className="flex items-center justify-center w-36 px-4 py-2 text-white bg-teal-600 rounded-lg hover:bg-teal-700 focus:outline-none"
         >
-          <ChevronLeftIcon className="w-6" />
-          Previous
+          <ChevronLeftIcon className="w-6 mr-2" /> Previous
         </button>
         <button
-          className="flex items-center justify-center gap-2 bg-green-500 text-white rounded-md px-4 py-2 w-36 hover:bg-green-600"
           type="submit"
+          className="flex items-center justify-center w-36 px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none"
         >
-          Save
-          <PlusCircleIcon className="w-6" />
+          Save <CheckIcon className="w-6 ml-2" />
         </button>
       </div>
     </div>

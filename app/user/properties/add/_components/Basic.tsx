@@ -25,7 +25,7 @@ const Basic = (props: Props) => {
   };
 
   return (
-    <div className={`bg-white rounded-lg shadow-md ${props.className}`}>
+    <div className={`bg-white border rounded-lg shadow-md ${props.className}`}>
       <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-3">
           <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -34,7 +34,7 @@ const Basic = (props: Props) => {
           <input
             {...register("name")}
             type="text"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
             placeholder="Property Name"
           />
           {errors.name && (
@@ -50,7 +50,7 @@ const Basic = (props: Props) => {
           </label>
           <textarea
             {...register("description")}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[100px]"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 min-h-[100px]"
             placeholder="Property Description"
           />
           {errors.description && (
@@ -66,7 +66,7 @@ const Basic = (props: Props) => {
           </label>
           <select
             {...register("typeId")}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
             defaultValue={getValues().typeId?.toString()}
           >
             <option value="">Select Type</option>
@@ -89,7 +89,7 @@ const Basic = (props: Props) => {
           </label>
           <select
             {...register("statusId")}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
             defaultValue={getValues().statusId?.toString()}
           >
             <option value="">Select Status</option>
@@ -113,7 +113,7 @@ const Basic = (props: Props) => {
           <input
             {...register("price")}
             type="number"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
             placeholder="Enter price"
           />
           {errors.price && (
@@ -133,7 +133,7 @@ const Basic = (props: Props) => {
           </button>
           <button
             onClick={handleNext}
-            className="flex items-center justify-center w-36 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex items-center justify-center w-36 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
           >
             Next
             <ChevronRightIcon className="w-4 h-4 ml-2" />

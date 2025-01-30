@@ -21,18 +21,16 @@ const Search = () => {
   }, 1000);
 
   return (
-    <div
-      className="p-4 flex items-center justify-center 
-    bg-gradient-to-br from-sky-400 to-indigo-500"
-    >
-      <div className="relative w-96">
+    <div className="p-6 flex items-center justify-center bg-gradient-to-br from-cyan-500 to-teal-600 min-h-[15vh]">
+      <div className="relative w-full max-w-md">
         <input
           type="text"
           onChange={(e) => handleChange(e.target.value)}
-          className="w-full px-4 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full px-5 py-3 rounded-xl shadow-md text-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-indigo-400 transition-all duration-200 ease-in-out"
+          placeholder="Search..."
           defaultValue={searchParams.get("query") ?? ""}
         />
-        <MagnifyingGlassIcon className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 text-slate-500" />
+        <MagnifyingGlassIcon className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
       </div>
     </div>
   );

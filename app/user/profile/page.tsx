@@ -12,18 +12,18 @@ const ProfilePage = async () => {
   const dbUser = await getUserById(user ? user.id : "");
 
   return (
-    <div>
-      <PageTitle title="My Profile" linkCaption="Back to homepage" href="/" />
-      <div className="m-6 p-6 bg-white rounded-xl shadow-lg flex flex-col gap-6">
+    <div className="bg-gray-50 min-h-screen">
+      <PageTitle title="My Profile" linkCaption="Back to Home Page" href="/" />
+      <div className="mx-2 mt-4 p-6 bg-white rounded-xl shadow-lg flex flex-col gap-6">
         <SectionTitle title="Basic Information" />
         <div className="flex justify-center md:justify-start">
           <div className="flex flex-col items-center gap-3">
-            <div className="relative w-24 h-24 rounded-full overflow-hidden ring-4 ring-slate-100 shadow-md">
+            <div className="relative w-32 h-32 rounded-full overflow-hidden ring-4 ring-slate-200 shadow-lg transition-transform duration-300 hover:scale-105">
               <Image
                 src={dbUser?.avatarUrl ?? "/profile.png"}
                 alt="Profile"
                 fill
-                className="object-cover hover:scale-105 transition-transform duration-300"
+                className="object-cover"
               />
             </div>
             <UploadAvatar userId={dbUser?.id ?? ""} />
@@ -42,17 +42,18 @@ const ProfilePage = async () => {
           />
           <Attribute title="Properties Posted" value={1} />
         </div>
-      </div>{" "}
+      </div>
     </div>
   );
 };
+
 export default ProfilePage;
 
 const Attribute = ({ title, value }: { title: string; value: ReactNode }) => {
   return (
-    <div className="flex flex-col text-sm">
+    <div className="flex flex-col text-sm p-4 bg-gray-100 rounded-lg shadow-sm">
       <span className="text-slate-800 font-semibold">{title}</span>
-      <span className="text-slate-600 ">{value}</span>
+      <span className="text-slate-600">{value}</span>
     </div>
   );
 };

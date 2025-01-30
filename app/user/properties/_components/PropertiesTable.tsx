@@ -1,5 +1,6 @@
 "use client";
 
+import { formatPrice } from "@/lib/constants";
 import { EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/16/solid";
 import { Prisma } from "@prisma/client";
 import Link from "next/link";
@@ -12,7 +13,6 @@ type Props = {
       status: true;
     };
   }>[];
-
   totalPages: number;
   currentPage: number;
 };
@@ -20,66 +20,83 @@ type Props = {
 const PropertiesTable = ({ properties, totalPages, currentPage }: Props) => {
   const router = useRouter();
 
+  const getStatusColor = (status: string) => {
+    const statusColors: { [key: string]: string } = {
+      Available: "bg-green-100 text-green-800",
+      Sold: "bg-red-100 text-red-800",
+      Rented: "bg-yellow-100 text-yellow-800",
+    };
+    return statusColors[status] || "bg-gray-100 text-gray-800";
+  };
+
   return (
-    <div className="flex flex-col items-center gap-4">
-      <div className="w-full overflow-x-auto">
-        <table className="min-w-full table-auto border-collapse">
+    <div className="flex flex-col items-center gap-6">
+      <div className="w-full overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+        <table className="min-w-full table-auto divide-y divide-gray-200">
           <thead>
-            <tr className="bg-gray-100">
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                NAME
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                PRICE
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                TYPE
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                STATUS
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                ACTIONS
-              </th>
+            <tr className="bg-gray-50">
+              {["Name", "Price", "Type", "Status", "Actions"].map((header) => (
+                <th
+                  key={header}
+                  className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                >
+                  {header}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {properties.map((item) => (
-              <tr key={item.id}>
-                <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{item.price}</td>
+              <tr key={item.id} className="bg-gray-50 hover:bg-gray-100">
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {item.type.value}
+                  <div className="font-medium text-gray-900">{item.name}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {item.status.value}
+                  <div className="text-gray-900 font-medium">
+                    {formatPrice(item.price)}
+                  </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center gap-4">
-                    <div className="group relative">
-                      <Link href={`/property/${item.id}`}>
-                        <EyeIcon className="w-5 text-slate-500 hover:text-slate-700" />
-                      </Link>
-                      <span className="invisible group-hover:visible absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded">
-                        Details
+                  <div className="text-gray-900">{item.type.value}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                      item.status.value
+                    )}`}
+                  >
+                    {item.status.value}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="flex items-center gap-6">
+                    <Link
+                      href={`/property/${item.id}`}
+                      className="group relative flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 transition-colors"
+                    >
+                      <EyeIcon className="w-5 h-5 text-gray-600 group-hover:text-gray-800" />
+                      <span className="invisible group-hover:visible absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap">
+                        View Details
                       </span>
-                    </div>
-                    <div className="group relative">
-                      <Link href={`/user/properties/${item.id}/edit`}>
-                        <PencilIcon className="w-5 text-yellow-500 hover:text-yellow-700" />
-                      </Link>
-                      <span className="invisible group-hover:visible absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded">
+                    </Link>
+                    <Link
+                      href={`/user/properties/${item.id}/edit`}
+                      className="group relative flex items-center justify-center w-8 h-8 rounded-full hover:bg-yellow-50 transition-colors"
+                    >
+                      <PencilIcon className="w-5 h-5 text-yellow-600 group-hover:text-yellow-700" />
+                      <span className="invisible group-hover:visible absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap">
                         Edit Property
                       </span>
-                    </div>
-                    <div className="group relative">
-                      <Link href={`/user/properties/${item.id}/delete`}>
-                        <TrashIcon className="w-5 text-red-500 hover:text-red-700" />
-                      </Link>
-                      <span className="invisible group-hover:visible absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded">
+                    </Link>
+                    <Link
+                      href={`/user/properties/${item.id}/delete`}
+                      className="group relative flex items-center justify-center w-8 h-8 rounded-full hover:bg-red-50 transition-colors"
+                    >
+                      <TrashIcon className="w-5 h-5 text-red-600 group-hover:text-red-700" />
+                      <span className="invisible group-hover:visible absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap">
                         Delete Property
                       </span>
-                    </div>
+                    </Link>
                   </div>
                 </td>
               </tr>
@@ -88,16 +105,17 @@ const PropertiesTable = ({ properties, totalPages, currentPage }: Props) => {
         </table>
       </div>
 
-      <div className="flex gap-2 mt-4">
+      <div className="flex gap-1">
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
           <button
             key={page}
             onClick={() => router.push(`/user/properties?pagenum=${page}`)}
-            className={`px-3 py-1 rounded ${
-              currentPage === page
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors
+              ${
+                currentPage === page
+                  ? "bg-teal-600 text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-300"
+              }`}
           >
             {page}
           </button>

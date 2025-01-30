@@ -1,14 +1,6 @@
 "use client";
 
 import { deleteProperty } from "@/lib/actions/property";
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-} from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -40,21 +32,31 @@ const ModalDeletePropertyPage = ({ params }: Props) => {
     }
   };
 
+  if (!isOpen) return null;
+
   return (
-    <Modal isOpen={isOpen} onOpenChange={handleCancel}>
-      <ModalContent>
-        <ModalHeader>Delete Property</ModalHeader>
-        <ModalBody>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div className="bg-white rounded-lg p-6 max-w-md w-full">
+        <div className="text-xl font-semibold mb-4">Delete Property</div>
+        <div className="mb-6">
           <p>Are you sure you want to delete this Property?</p>
-        </ModalBody>
-        <ModalFooter>
-          <Button onClick={handleCancel}>Cancel</Button>
-          <Button onClick={handleDelete} color="danger" variant="light">
+        </div>
+        <div className="flex justify-end gap-4">
+          <button
+            onClick={handleCancel}
+            className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleDelete}
+            className="px-4 py-2 rounded bg-red-100 text-red-600 hover:bg-red-200"
+          >
             Delete
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

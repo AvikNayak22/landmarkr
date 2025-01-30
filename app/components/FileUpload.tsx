@@ -49,7 +49,7 @@ const FileInput = React.forwardRef<HTMLInputElement, IProps>(
           }
         >
           <div
-            className={` inline-block h-full  py-3 rounded-l-md px-2  text-white transition duration-500  bg-primary-500 hover:bg-primary-700 hover:bg-gra  shadow shadow-violet-600/25 hover:shadow-primary-600/75`}
+            className={` inline-block h-full  py-3 rounded-l-md px-2  text-white transition duration-500  bg-teal-500 hover:bg-teal-700 hover:bg-gra  shadow shadow-violet-600/25 hover:shadow-teal-600/75`}
           >
             <input
               className="hidden"

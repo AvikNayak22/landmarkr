@@ -21,7 +21,7 @@ const signInPanel = async () => {
 
   return (
     <div className="flex gap-3">
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <button className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">
         <LoginLink>Sign In</LoginLink>
       </button>
       <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">

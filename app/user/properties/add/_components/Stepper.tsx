@@ -15,9 +15,9 @@ const Stepper = ({ items, activeItem, setActiveItem, className }: Props) => {
           <div className="flex flex-col items-center">
             <div
               className={`rounded-full w-6 h-6 flex justify-center items-center transition cursor-pointer 
-                ${index === activeItem ? "bg-blue-500 text-white" : ""} 
+                ${index === activeItem ? "bg-teal-500 text-white" : ""} 
                 ${index > activeItem ? "bg-gray-400 text-white" : ""} 
-                ${index < activeItem ? "bg-blue-700 text-white" : ""}
+                ${index < activeItem ? "bg-teal-700 text-white" : ""}
               `}
               onClick={() => index < activeItem && setActiveItem(index)}
             >
@@ -33,7 +33,7 @@ const Stepper = ({ items, activeItem, setActiveItem, className }: Props) => {
                 after:transition-all after:duration-300 after:ease-in
                 ${
                   index < activeItem
-                    ? "after:w-full after:border-blue-500"
+                    ? "after:w-full after:border-teal-500"
                     : "after:w-0"
                 }
               `}

@@ -12,12 +12,7 @@ const PictureCard = ({ src, onDelete, index }: Props) => {
   return (
     <div className="flex flex-col items-center border border-gray-200 p-4 rounded-md shadow-md">
       <div className="w-36 h-36 relative">
-        <Image
-          src={src}
-          alt="Property Image"
-          layout="fill"
-          objectFit="contain"
-        />
+        <Image src={src} className="object-contain" alt="Property Image" fill />
       </div>
 
       <button className="mt-2" onClick={() => onDelete(index)}>

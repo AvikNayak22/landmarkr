@@ -118,7 +118,7 @@ export const ImagesSlider = ({
 
   return (
     <div
-      className={`overflow-hidden h-full w-full relative flex items-center justify-center ${className}`}
+      className={`overflow-hidden rounded-xl h-full w-full relative flex items-center justify-center ${className}`}
       style={{
         perspective: "1000px",
       }}

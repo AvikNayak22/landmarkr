@@ -1,7 +1,6 @@
 import SubmitButton from "@/app/components/SubmitButton";
 import { deleteProperty } from "@/lib/actions/property";
 import prisma from "@/lib/prisma";
-import { Button } from "@heroui/react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
@@ -48,9 +47,15 @@ const DeletePropertyPage = async ({ params }: Props) => {
       </p>
       <div className="flex justify-center gap-3 ">
         <Link href="/user/properties">
-          <Button>Cancel</Button>
+          <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+            Cancel
+          </button>
         </Link>
-        <SubmitButton type="submit" color="danger" variant="light" />
+        <SubmitButton
+          type="submit"
+          color="danger"
+          className="px-4 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200"
+        />
       </div>
     </form>
   );

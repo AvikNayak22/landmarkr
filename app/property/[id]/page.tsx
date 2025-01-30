@@ -1,5 +1,6 @@
 import { ImagesSlider } from "@/app/components/imageSlider";
 import PageTitle from "@/app/components/PageTitle";
+import { formatPrice } from "@/lib/constants";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -34,21 +35,22 @@ const PropertyPage = async ({ params }: Props) => {
         linkCaption="Back to Properties"
       />
 
-      <div className="p-4">
-        <h2 className="text-2xl font-bold text-primary my-5">
+      <div className="mx-4">
+        <h2 className="text-3xl font-bold text-primary my-5">
           {property.name}
         </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="col-span-2">
             <ImagesSlider images={property.images.map((img) => img.url)} />
             <h2 className="text-2xl font-bold text-gray-700 mt-7">
-              $ {property.price} / {property.status.value}
+              {formatPrice(property.price)} / {property.status.value}
             </h2>
-            <p className="text-sm text-slate-600 mt-7">
+            <p className="text-base text-gray-600 mt-4 leading-relaxed">
               {property.description}
             </p>
           </div>
-          <div className="p-5 flex flex-col gap-1 border rounded-lg shadow-sm">
+          <div className="p-6 flex flex-col gap-4 border rounded-lg shadow-md bg-white">
             <Title title="Features" />
             <Attribute label="Bedrooms" value={property.feature?.bedrooms} />
             <Attribute label="Bathrooms" value={property.feature?.bathrooms} />
@@ -58,7 +60,7 @@ const PropertyPage = async ({ params }: Props) => {
             />
             <Attribute label="Area" value={property.feature?.area} />
 
-            <Title title="Address" className="mt-7" />
+            <Title title="Address" className="mt-6" />
             <Attribute label="City" value={property.location?.city} />
             <Attribute label="Landmarks" value={property.location?.landmark} />
             <Attribute label="Zip Code" value={property.location?.zip} />
@@ -67,7 +69,7 @@ const PropertyPage = async ({ params }: Props) => {
               value={property.location?.streetAddress}
             />
 
-            <Title title="Owner Details" className="mt-7" />
+            <Title title="Owner Details" className="mt-6" />
             <Attribute label="Owner name" value={property.contact?.name} />
             <Attribute label="Email" value={property.contact?.email} />
             <Attribute label="Phone" value={property.contact?.phone} />
@@ -77,13 +79,14 @@ const PropertyPage = async ({ params }: Props) => {
     </div>
   );
 };
+
 export default PropertyPage;
 
 const Title = ({ title, className }: { title: string; className?: string }) => {
   return (
     <div className={className}>
-      <h2 className="text-xl font-bold text-slate-700">{title}</h2>
-      <hr className="border border-solid border-slate-300" />
+      <h2 className="text-lg font-semibold text-gray-700">{title}</h2>
+      <hr className="border-t border-gray-300 mt-1" />
     </div>
   );
 };
@@ -95,8 +98,8 @@ const Attribute = ({
   label: string;
   value?: string | number;
 }) => (
-  <div className="flex justify-between">
-    <span className="text-sm text-slate-600">{label}</span>
-    <span className="text-sm text-slate-600">{value}</span>
+  <div className="flex justify-between text-sm text-gray-600">
+    <span className="font-medium">{label}:</span>
+    <span>{value}</span>
   </div>
 );

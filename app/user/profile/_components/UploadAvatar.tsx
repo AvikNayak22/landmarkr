@@ -35,7 +35,7 @@ const UploadAvatar = ({ userId }: { userId: string }) => {
   return (
     <div>
       <button className="p-2 rounded-md hover:bg-gray-100" onClick={handleOpen}>
-        <PencilIcon className="w-6 text-slate-400 hover:text-primary transition-colors" />
+        <PencilIcon className="w-6 text-slate-400 hover:text-teal-500 transition-colors" />
       </button>
 
       {isModalOpen && (
@@ -70,7 +70,7 @@ const UploadAvatar = ({ userId }: { userId: string }) => {
                   Cancel
                 </button>
                 <button
-                  className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors disabled:opacity-50"
+                  className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-500/90 transition-colors disabled:opacity-50"
                   onClick={handleSubmit}
                   disabled={isSubmitting}
                 >

@@ -2,7 +2,10 @@
 
 import { useFormStatus } from "react-dom";
 
-const SubmitButton = ({ className, ...props }) => {
+const SubmitButton = ({
+  className,
+  ...props
+}: { className?: string } & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const { pending } = useFormStatus();
 
   return (

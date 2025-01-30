@@ -8,7 +8,7 @@ interface Props {
   params: { id: string };
 }
 
-const EditPropertyPage = async ({ params }: Props) => {
+const EditPropertyPage = async ({ params: { id } }: Props) => {
   const [propertyTypes, propertyStatuses, property] = await Promise.all([
     prisma.propertyType.findMany(),
 
@@ -16,7 +16,7 @@ const EditPropertyPage = async ({ params }: Props) => {
 
     prisma.property.findUnique({
       where: {
-        id: +params.id,
+        id: +id,
       },
       include: {
         location: true,

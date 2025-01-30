@@ -9,11 +9,11 @@ interface Props {
 
 const PageTitle = (props: Props) => {
   return (
-    <div className="p-4 bg-gradient-to-br from-cyan-400 to-blue-500 flex justify-between">
-      <h1 className="text-white text-xl font-medium">{props.title}</h1>
-      {props.href! && (
+    <div className="p-6 bg-gradient-to-br from-teal-500 to-cyan-600 flex justify-between items-center shadow-md">
+      <h1 className="text-white text-2xl font-semibold">{props.title}</h1>
+      {props.href && (
         <Link
-          className="text-white hover:text-cyan-200 transition-colors"
+          className="text-white text-lg font-medium hover:underline transition-colors duration-200 ease-in-out"
           href={props.href}
         >
           {props.linkCaption}

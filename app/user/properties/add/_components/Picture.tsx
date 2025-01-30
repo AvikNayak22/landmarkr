@@ -62,14 +62,14 @@ const Picture = (props: Props) => {
 
       <div className="flex justify-center col-span-2 gap-3 mt-3">
         <button
-          className="flex items-center justify-center w-36 p-2 bg-blue-500 text-white rounded"
+          className="flex items-center justify-center w-36 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
           onClick={props.prev}
         >
           <ChevronLeftIcon className="w-6 h-6" />
           Previous
         </button>
         <button
-          className="flex items-center justify-center w-36 p-2 bg-blue-500 text-white rounded"
+          className="flex items-center justify-center w-36 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
           onClick={props.next}
         >
           Next
