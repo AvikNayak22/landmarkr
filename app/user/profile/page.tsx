@@ -14,11 +14,12 @@ const ProfilePage = async () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <PageTitle title="My Profile" linkCaption="Back to Home Page" href="/" />
-      <div className="mx-2 mt-4 p-6 border rounded-xl shadow-md flex flex-col gap-6">
+      <div className="mx-2 mt-6 p-8 bg-white border rounded-2xl shadow-lg">
         <SectionTitle title="Basic Information" />
-        <div className="flex justify-center md:justify-start">
-          <div className="flex flex-col items-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden ring-4 ring-slate-200 shadow-lg transition-transform duration-300 hover:scale-105">
+
+        <div className="flex flex-col md:flex-row items-center gap-10 mt-4">
+          <div className="flex flex-col items-center gap-2">
+            <div className="relative w-36 h-36 rounded-full overflow-hidden ring-4 ring-slate-200 shadow-lg transition-transform duration-300 hover:scale-110">
               <Image
                 src={dbUser?.avatarUrl ?? "/profile.png"}
                 alt="Profile"
@@ -28,19 +29,19 @@ const ProfilePage = async () => {
             </div>
             <UploadAvatar userId={dbUser?.id ?? ""} />
           </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Attribute
-            title="Name"
-            value={`${dbUser?.firstName} ${dbUser?.lastName}`}
-          />
-          <Attribute title="Email" value={dbUser?.email} />
-          <Attribute
-            title="Registered On"
-            value={dbUser?.createdAt.toLocaleDateString()}
-          />
-          <Attribute title="Properties Posted" value={1} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+            <Attribute
+              title="Name"
+              value={`${dbUser?.firstName} ${dbUser?.lastName}`}
+            />
+            <Attribute title="Email" value={dbUser?.email} />
+            <Attribute
+              title="Registered On"
+              value={dbUser?.createdAt.toLocaleDateString()}
+            />
+            <Attribute title="Properties Posted" value={1} />
+          </div>
         </div>
       </div>
     </div>
@@ -51,9 +52,9 @@ export default ProfilePage;
 
 const Attribute = ({ title, value }: { title: string; value: ReactNode }) => {
   return (
-    <div className="flex flex-col text-sm bg-gray-100 p-4 border rounded-lg shadow-sm">
-      <span className="text-slate-800 font-semibold">{title}</span>
-      <span className="text-slate-600">{value}</span>
+    <div className="flex flex-col bg-gray-100 p-4 border rounded-lg shadow-sm transition-all duration-300 hover:bg-gray-200">
+      <span className="text-slate-800 font-semibold ">{title}</span>
+      <span className="text-slate-600 text-sm">{value}</span>
     </div>
   );
 };
