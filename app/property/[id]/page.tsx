@@ -6,15 +6,17 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 interface Props {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 const PropertyPage = async ({ params }: Props) => {
+  const resolvedParams = await params;
+
   const property = await prisma.property.findUnique({
     where: {
-      id: +params.id,
+      id: +resolvedParams.id,
     },
     include: {
       status: true,
@@ -58,7 +60,7 @@ const PropertyPage = async ({ params }: Props) => {
             </p>
           </div>
 
-          <div className="p-6 flex flex-col gap-4 border rounded-lg shadow-md bg-white">
+          <div className="p-6 flex flex-col gap-4 border rounded-xl shadow-md bg-white">
             <Title title="Features" />
             <Attribute label="Bedrooms" value={property.feature?.bedrooms} />
             <Attribute label="Bathrooms" value={property.feature?.bathrooms} />
