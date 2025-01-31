@@ -69,7 +69,9 @@ const Basic = (props: Props) => {
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
             defaultValue={getValues().typeId?.toString()}
           >
-            <option value="">Select Type</option>
+            <option value="" disabled>
+              Select Type
+            </option>
             {props.types.map((item) => (
               <option key={item.id} value={item.id?.toString()}>
                 {item.value}
@@ -92,7 +94,9 @@ const Basic = (props: Props) => {
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
             defaultValue={getValues().statusId?.toString()}
           >
-            <option value="">Select Status</option>
+            <option value="" disabled>
+              Select Status
+            </option>
             {props.statuses.map((item) => (
               <option key={item.id} value={item.id?.toString()}>
                 {item.value}

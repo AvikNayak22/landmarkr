@@ -84,6 +84,7 @@ const AddPropertyForm = ({ isEdit = false, ...props }: Props) => {
       }
     } catch (error) {
       console.error({ error });
+      toast.error("Something went wrong!");
     } finally {
       router.push("/user/properties");
     }
