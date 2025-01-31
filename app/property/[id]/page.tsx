@@ -12,11 +12,11 @@ interface Props {
 }
 
 const PropertyPage = async ({ params }: Props) => {
-  const resolvedParams = await params;
+  const { id } = await params;
 
   const property = await prisma.property.findUnique({
     where: {
-      id: +resolvedParams.id,
+      id: Number(id),
     },
     include: {
       status: true,

@@ -6,9 +6,9 @@ import Search from "./components/Search";
 const PAGE_SIZE = 8;
 
 interface Props {
-  searchParams: {
+  searchParams: Promise<{
     [key: string]: string | string[] | undefined;
-  };
+  }>;
 }
 
 export default async function Home({ searchParams }: Props) {
@@ -33,19 +33,19 @@ export default async function Home({ searchParams }: Props) {
         },
       },
     },
-    ...(!!query && {
+    ...(query && {
       where: {
         name: {
           contains: String(query),
         },
       },
     }),
-    skip: +pagenum * PAGE_SIZE,
+    skip: Number(pagenum) * PAGE_SIZE,
     take: PAGE_SIZE,
   });
 
   const totalPropertiesPromise = prisma.property.count({
-    ...(!!query && {
+    ...(query && {
       where: {
         name: {
           contains: String(query),
@@ -64,7 +64,7 @@ export default async function Home({ searchParams }: Props) {
   return (
     <div>
       <Search />
-      <PropertyContainer totalPages={totalPages} currentPage={+pagenum}>
+      <PropertyContainer totalPages={totalPages} currentPage={Number(pagenum)}>
         {properties.length === 0 ? (
           <div className="flex items-center justify-center min-h-[400px]">
             <h2 className="text-2xl font-semibold mb-2">No Properties Found</h2>

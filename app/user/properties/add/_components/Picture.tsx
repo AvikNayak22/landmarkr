@@ -23,8 +23,8 @@ const Picture = (props: Props) => {
         }
       />
       <div className="flex gap-3 flex-wrap mt-4">
-        {!!props.savedImagesUrl &&
-          !!props.setSavedImagesUrl &&
+        {props.savedImagesUrl &&
+          props.setSavedImagesUrl &&
           props.savedImagesUrl.map((image, index) => {
             return (
               <PictureCard
@@ -32,7 +32,7 @@ const Picture = (props: Props) => {
                 src={image.url}
                 index={index}
                 onDelete={() =>
-                  !!props.setSavedImagesUrl &&
+                  props.setSavedImagesUrl &&
                   props.setSavedImagesUrl(
                     props.savedImagesUrl!.filter((img) => img.id !== image.id)
                   )

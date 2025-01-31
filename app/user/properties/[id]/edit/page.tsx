@@ -20,7 +20,7 @@ const EditPropertyPage = async ({ params }: Props) => {
 
     prisma.property.findUnique({
       where: {
-        id: +id,
+        id: Number(id),
       },
       include: {
         location: true,

@@ -79,7 +79,7 @@ const AddPropertyForm = ({ isEdit = false, ...props }: Props) => {
         await editProperty(props.property.id, data, imageUrls, deletedImageIDs);
         toast.success("Property Updated!");
       } else {
-        await saveProperty(data, imageUrls, user?.id);
+        await saveProperty(data, imageUrls, user?.id as string);
         toast.success("Property Added!");
       }
     } catch (error) {

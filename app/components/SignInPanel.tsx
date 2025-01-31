@@ -16,7 +16,7 @@ const signInPanel = async () => {
       },
     });
 
-    return <>{!!dbUser && <UserProfilePanel user={dbUser} />}</>;
+    return <>{dbUser && <UserProfilePanel user={dbUser} />}</>;
   }
 
   return (

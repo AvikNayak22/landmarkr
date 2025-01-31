@@ -24,7 +24,7 @@ const ModalDeletePropertyPage = ({ params }: Props) => {
 
   const handleDelete = async () => {
     try {
-      await deleteProperty(+params.id);
+      await deleteProperty(Number(params.id));
       router.push("/user/properties");
       setIsOpen(false);
     } catch (error) {

@@ -5,9 +5,9 @@ import PropertiesTable from "./_components/PropertiesTable";
 const PAGE_SIZE = 10;
 
 interface Props {
-  searchParams: {
+  searchParams: Promise<{
     [key: string]: string | string[] | undefined;
-  };
+  }>;
 }
 
 const PropertiesPage = async ({ searchParams }: Props) => {
@@ -24,7 +24,7 @@ const PropertiesPage = async ({ searchParams }: Props) => {
       type: true,
       status: true,
     },
-    skip: +pageNum * PAGE_SIZE,
+    skip: Number(pageNum) * PAGE_SIZE,
     take: PAGE_SIZE,
   });
 
@@ -56,7 +56,7 @@ const PropertiesPage = async ({ searchParams }: Props) => {
     <PropertiesTable
       properties={properties}
       totalPages={totalPages}
-      currentPage={+pageNum}
+      currentPage={Number(pageNum)}
     />
   );
 };
