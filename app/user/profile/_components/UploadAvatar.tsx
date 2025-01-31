@@ -73,7 +73,7 @@ const UploadAvatar = ({ userId }: { userId: string }) => {
                   Cancel
                 </button>
                 <button
-                  className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-500/90 transition-colors disabled:opacity-50"
+                  className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors disabled:opacity-50"
                   onClick={handleSubmit}
                   disabled={isSubmitting}
                 >
