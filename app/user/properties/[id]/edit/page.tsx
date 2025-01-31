@@ -5,10 +5,14 @@ import { notFound, redirect } from "next/navigation";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 interface Props {
-  params: { id: string };
+  params: Promise<{
+    id: string;
+  }>;
 }
 
-const EditPropertyPage = async ({ params: { id } }: Props) => {
+const EditPropertyPage = async ({ params }: Props) => {
+  const { id } = await params;
+
   const [propertyTypes, propertyStatuses, property] = await Promise.all([
     prisma.propertyType.findMany(),
 
