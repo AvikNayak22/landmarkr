@@ -1,3 +1,5 @@
+"use client";
+
 import { use } from "react";
 import { deleteProperty } from "@/lib/actions/property";
 import { useRouter } from "next/navigation";
