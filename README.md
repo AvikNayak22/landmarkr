@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Landmarker: Property Listing App 🏠
 
-## Getting Started
+A modern, full-stack property listing application built with **Next.js**, **TypeScript**, **Prisma**, **Supabase**, **React Hook Form**, **Zod**, and **Kinde**. This app allows users to browse, list, and manage properties easily.
 
-First, run the development server:
+## Screenshots 🖼️ 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+ ### 1. Home Page:
+   
+ <kbd>![Home Page](https://github.com/user-attachments/assets/99b7fb1b-7b23-4fbf-9d5d-33221a01536e)</kbd>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ ### 2. Property Details Page:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+ <kbd>![Property Details Page](https://github.com/user-attachments/assets/ddcb3bda-bc7d-4f80-a195-7c0c998ab6d8)<kbd>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ ###  3. User Profile Page:
 
-## Learn More
+ <kbd>![User Profile Page](https://github.com/user-attachments/assets/c5c37611-f124-47d6-b1f8-901e6ffdebbd)<kbd>
 
-To learn more about Next.js, take a look at the following resources:
+ ###  4. Property Listing Page:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<kbd>![Property Listing Page](https://github.com/user-attachments/assets/9a893a59-a5d1-478c-a781-2c69d321578b)<kbd>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+ ### 5. Add/Edit Property Page:
 
-## Deploy on Vercel
+ <kbd>![Add/Edit Property Page](https://github.com/user-attachments/assets/9037dd43-30d5-4c9a-8d61-2639efd92ca4)<kbd>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Features ✨
+
+- **User Authentication**: Secure authentication powered by **Kinde**.
+- **Property Listings**: Create, read, update, and delete property listings.
+- **Form Validation**: Robust form handling with **React Hook Form** and **Zod**.
+- **Database**: Managed with **Prisma** and **Supabase** for seamless data storage.
+- **Type Safety**: Full TypeScript support for a type-safe development experience.
+
+## Tech Stack 🛠️
+
+- **Frontend**: Next.js, TypeScript, Tailwind CSS 
+- **Backend**: Next.js API Routes & Server Actions
+- **Database**: Supabase (PostgreSQL) with Prisma ORM
+- **Authentication**: Kinde
+- **Form Management**: React Hook Form with Zod validation
+- **Deployment**: Vercel (recommended)
+
+## Getting Started 🚀
+
+Follow these steps to set up the project locally.
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+- Supabase account
+- Kinde account
+
+### Installation
+
+1. **Clone the repository**:
+   ```
+   git clone https://github.com/your-username/property-listing-app.git
+   cd property-listing-app
+   
+2. **Install dependencies**:
+   ```
+   npm install
+
+3. **Set up environment variables**:<br/>
+   Create a .env file in the root directory and add the following variables:
+   ```
+   DATABASE_URL="your-supabase-database-url"
+   NEXT_PUBLIC_SUPABASE_URL="your-supabase-url"
+   NEXT_PUBLIC_SUPABASE_ANON_KEY="your-supabase-anon-key"
+   KINDLE_CLIENT_ID="your-kinde-client-id"
+   KINDLE_CLIENT_SECRET="your-kinde-client-secret"
+   KINDLE_REDIRECT_URI="http://localhost:3000/auth/callback"
+
+4. **Run database migrations**:
+   ```
+   npx prisma migrate dev --name init
+
+5. **Start the development server**:
+   ```
+   npm run dev
+
+# Contributing 🤝
+
+Contributions are welcome! If you'd like to contribute, please follow these steps:
+
+1. **Fork the repository.**
+   
+2. **Create a new branch:**
+   ```sh
+   git checkout -b feature/your-feature-name
+   ```
+3. **Commit your changes:**
+   ```sh
+   git commit -m 'Add some feature'
+   ```
+4. **Push to the branch:**
+   ```sh
+   git push origin feature/your-feature-name
+   ```
+5. **Open a pull request.**
+
+Thank you for your contributions! 🎉
