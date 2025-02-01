@@ -100,12 +100,13 @@ const Features = (props: Props) => {
         <Controller
           control={control}
           name="propertyFeature.hasSwimmingPool"
-          render={({ field }) => (
+          render={({ field: { value, onChange, ...field } }) => (
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 {...field}
-                defaultChecked={getValues().propertyFeature?.hasSwimmingPool}
+                checked={value}
+                onChange={(e) => onChange(e.target.checked)}
               />
               <span>Has Swimming Pool</span>
             </label>
@@ -115,12 +116,13 @@ const Features = (props: Props) => {
         <Controller
           control={control}
           name="propertyFeature.hasGardenYard"
-          render={({ field }) => (
+          render={({ field: { value, onChange, ...field } }) => (
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 {...field}
-                defaultChecked={getValues().propertyFeature?.hasGardenYard}
+                checked={value}
+                onChange={(e) => onChange(e.target.checked)}
               />
               <span>Has Garden/Yard</span>
             </label>
@@ -130,12 +132,13 @@ const Features = (props: Props) => {
         <Controller
           control={control}
           name="propertyFeature.hasBalcony"
-          render={({ field }) => (
+          render={({ field: { value, onChange, ...field } }) => (
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 {...field}
-                defaultChecked={getValues().propertyFeature?.hasBalcony}
+                checked={value}
+                onChange={(e) => onChange(e.target.checked)}
               />
               <span>Has Balcony</span>
             </label>
