@@ -14,14 +14,14 @@ export const ImagesSlider = ({
 }: {
   images: string[];
   children?: React.ReactNode;
-  overlay?: React.ReactNode;
+  overlay?: boolean;
   overlayClassName?: string;
   className?: string;
   autoplay?: boolean;
   direction?: "up" | "down";
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [loadedImages, setLoadedImages] = useState<string[]>([]);
 
   const handleNext = () => {
@@ -38,10 +38,10 @@ export const ImagesSlider = ({
 
   useEffect(() => {
     loadImages();
-  }, []);
+  }, [images]); // Added images dependency
 
   const loadImages = () => {
-    setLoading(true);
+    setIsLoading(true);
     const loadPromises = images.map((image) => {
       return new Promise((resolve, reject) => {
         const img = new Image();
@@ -54,10 +54,14 @@ export const ImagesSlider = ({
     Promise.all(loadPromises)
       .then((loadedImages) => {
         setLoadedImages(loadedImages as string[]);
-        setLoading(false);
+        setIsLoading(false);
       })
-      .catch((error) => console.error("Failed to load images", error));
+      .catch((error) => {
+        console.error("Failed to load images", error);
+        setIsLoading(false);
+      });
   };
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "ArrowRight") {
@@ -72,16 +76,16 @@ export const ImagesSlider = ({
     // autoplay
     let interval: NodeJS.Timeout;
     if (autoplay) {
-      interval = setInterval(() => {
-        handleNext();
-      }, 5000);
+      interval = setInterval(handleNext, 5000);
     }
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      clearInterval(interval);
+      if (interval) {
+        clearInterval(interval);
+      }
     };
-  }, []);
+  }, []); // Empty dependency array since handlers don't depend on any state
 
   const slideVariants = {
     initial: {
@@ -114,7 +118,15 @@ export const ImagesSlider = ({
     },
   };
 
-  const areImagesLoaded = loadedImages.length > 0;
+  if (isLoading) {
+    return (
+      <div
+        className={`h-[540px] w-full flex items-center justify-center ${className}`}
+      >
+        <div className="animate-pulse bg-gray-200 rounded-xl w-full h-full" />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -123,26 +135,24 @@ export const ImagesSlider = ({
         perspective: "1000px",
       }}
     >
-      {areImagesLoaded && children}
-      {areImagesLoaded && overlay && (
+      {children}
+      {overlay && (
         <div
           className={`absolute inset-0 bg-black/60 z-40 ${overlayClassName}`}
         />
       )}
 
-      {areImagesLoaded && (
-        <AnimatePresence>
-          <motion.img
-            key={currentIndex}
-            src={loadedImages[currentIndex]}
-            initial="initial"
-            animate="visible"
-            exit={direction === "up" ? "upExit" : "downExit"}
-            variants={slideVariants}
-            className="image h-full w-full absolute inset-0 object-cover object-center"
-          />
-        </AnimatePresence>
-      )}
+      <AnimatePresence>
+        <motion.img
+          key={currentIndex}
+          src={loadedImages[currentIndex]}
+          initial="initial"
+          animate="visible"
+          exit={direction === "up" ? "upExit" : "downExit"}
+          variants={slideVariants}
+          className="image h-full w-full absolute inset-0 object-cover object-center"
+        />
+      </AnimatePresence>
     </div>
   );
 };
