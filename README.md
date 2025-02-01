@@ -20,7 +20,7 @@ A modern, full-stack property listing application built with **Next.js**, **Type
 
 <kbd>![Property Listing Page](https://github.com/user-attachments/assets/9a893a59-a5d1-478c-a781-2c69d321578b)<kbd>
 
- ### 5. Add/Edit Property Page**
+ ### 5. Add/Edit Property Page:
 
  <kbd>![Add/Edit Property Page](https://github.com/user-attachments/assets/9037dd43-30d5-4c9a-8d61-2639efd92ca4)<kbd>
 
