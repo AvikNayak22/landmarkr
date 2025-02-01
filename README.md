@@ -2,7 +2,28 @@
 
 A modern, full-stack property listing application built with **Next.js**, **TypeScript**, **Prisma**, **Supabase**, **React Hook Form**, **Zod**, and **Kinde**. This app allows users to browse, list, and manage properties easily.
 
-![Project Screenshot](./screenshot.png)
+## Screenshots 🖼️ 
+
+ ### 1. Home Page:
+   
+ <kbd>![Home Page](https://github.com/user-attachments/assets/99b7fb1b-7b23-4fbf-9d5d-33221a01536e)</kbd>
+
+ ### 2. Property Details Page:
+
+ <kbd>![Property Details Page](https://github.com/user-attachments/assets/ddcb3bda-bc7d-4f80-a195-7c0c998ab6d8)<kbd>
+
+ ###  3. User Profile Page:
+
+ <kbd>![User Profile Page](https://github.com/user-attachments/assets/c5c37611-f124-47d6-b1f8-901e6ffdebbd)<kbd>
+
+ ###  4. Property Listing Page:
+
+<kbd>![Property Listing Page](https://github.com/user-attachments/assets/9a893a59-a5d1-478c-a781-2c69d321578b)<kbd>
+
+ ### 5. Add/Edit Property Page**
+
+ <kbd>![Add/Edit Property Page](https://github.com/user-attachments/assets/9037dd43-30d5-4c9a-8d61-2639efd92ca4)<kbd>
+
 
 ## Features ✨
 
@@ -57,9 +78,9 @@ Follow these steps to set up the project locally.
    ```
    npx prisma migrate dev --name init
 
-5. **Start the development server:**:
+5. **Start the development server**:
    ```
-   npx prisma migrate dev --name init
+   npm run dev
 
 # Contributing 🤝
 
