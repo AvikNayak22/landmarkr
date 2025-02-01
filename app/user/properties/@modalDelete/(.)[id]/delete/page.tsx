@@ -1,34 +1,29 @@
-"use client";
-
+import { use } from "react";
 import { deleteProperty } from "@/lib/actions/property";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 const ModalDeletePropertyPage = ({ params }: Props) => {
   const router = useRouter();
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    setIsOpen(true);
-  }, []);
+  const { id } = use(params); // Resolves the Promise to get the id
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleCancel = () => {
-    router.push("/user/properties");
     setIsOpen(false);
+    router.push("/user/properties");
   };
 
   const handleDelete = async () => {
     try {
-      await deleteProperty(Number(params.id));
-      router.push("/user/properties");
+      await deleteProperty(Number(id));
       setIsOpen(false);
+      router.push("/user/properties");
     } catch (error) {
-      throw error;
+      console.error("Failed to delete property:", error);
     }
   };
 
@@ -50,7 +45,7 @@ const ModalDeletePropertyPage = ({ params }: Props) => {
           </button>
           <button
             onClick={handleDelete}
-            className="px-4 py-2 rounded-lg bg-red-600 text-white  hover:bg-red-700"
+            className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700"
           >
             Delete
           </button>

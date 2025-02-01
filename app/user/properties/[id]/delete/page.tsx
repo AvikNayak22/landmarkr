@@ -6,15 +6,17 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 const DeletePropertyPage = async ({ params }: Props) => {
   const { getUser } = getKindeServerSession();
 
+  const { id } = await params;
+
   const PropertyPromise = prisma.property.findUnique({
     where: {
-      id: +params.id,
+      id: Number(id),
     },
   });
 
@@ -28,7 +30,7 @@ const DeletePropertyPage = async ({ params }: Props) => {
     "use server";
 
     try {
-      await deleteProperty(+params.id);
+      await deleteProperty(Number(id));
       redirect("/user/properties");
     } catch (error) {
       throw error;
