@@ -3,7 +3,7 @@ import PropertyCard from "./components/PropertyCard";
 import PropertyContainer from "./components/PropertyContainer";
 import Search from "./components/Search";
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 6;
 
 interface Props {
   searchParams: Promise<{
