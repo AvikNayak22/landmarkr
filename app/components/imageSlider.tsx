@@ -38,7 +38,7 @@ export const ImagesSlider = ({
 
   useEffect(() => {
     loadImages();
-  }, [images]); // Added images dependency
+  }, [images]);
 
   const loadImages = () => {
     setIsLoading(true);

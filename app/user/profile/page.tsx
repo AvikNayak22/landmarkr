@@ -5,11 +5,18 @@ import SectionTitle from "./_components/SectionTitle";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ReactNode } from "react";
 import UploadAvatar from "./_components/UploadAvatar";
+import prisma from "@/lib/prisma";
 
 const ProfilePage = async () => {
   const { getUser } = await getKindeServerSession();
   const user = await getUser();
   const dbUser = await getUserById(user ? user.id : "");
+
+  const propertiesPosted = await prisma.property.count({
+    where: {
+      userId: dbUser?.id,
+    },
+  });
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -40,7 +47,7 @@ const ProfilePage = async () => {
               title="Registered On"
               value={dbUser?.createdAt.toLocaleDateString()}
             />
-            <Attribute title="Properties Posted" value={1} />
+            <Attribute title="Properties Posted" value={propertiesPosted} />
           </div>
         </div>
       </div>

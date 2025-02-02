@@ -23,6 +23,7 @@ import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
+// Define the steps for the property addition form
 const steps = [
   { label: "Basic" },
   { label: "Location" },
@@ -31,6 +32,7 @@ const steps = [
   { label: "Contact" },
 ];
 
+// Interface for component props
 interface Props {
   types: PropertyType[];
   statuses: PropertyStatus[];
@@ -45,10 +47,14 @@ interface Props {
   isEdit?: boolean;
 }
 
+// Type inference for form input using Zod schema
 export type AddPropertyInputType = z.infer<typeof AddPropertyFormSchema>;
 
 const AddPropertyForm = ({ isEdit = false, ...props }: Props) => {
+  // Initialize router for navigation
   const router = useRouter();
+
+  // Set up form methods with Zod validation and default values
   const methods = useForm<AddPropertyInputType>({
     resolver: zodResolver(AddPropertyFormSchema),
     defaultValues: {
@@ -62,44 +68,60 @@ const AddPropertyForm = ({ isEdit = false, ...props }: Props) => {
       typeId: props.property?.typeId ?? undefined,
     },
   });
+
+  // State for managing images and form steps
   const [images, setImages] = useState<File[]>([]);
   const [savedImagesUrl, setSavedImagesUrl] = useState<PropertyImage[]>(
     props.property?.images ?? []
   );
   const [step, setStep] = useState(0);
+
+  // Get current user information
   const { user } = useKindeBrowserClient();
 
+  // Form submission handler
   const onSubmit: SubmitHandler<AddPropertyInputType> = async (data) => {
+    // Upload images to storage
     const imageUrls = await uploadImages(images);
     try {
+      // Handle property edit or creation
       if (isEdit && props.property) {
+        // Identify images to be deleted
         const deletedImageIDs = props.property.images
           .filter((item) => !savedImagesUrl.includes(item))
           .map((item) => item.id);
+
+        // Edit existing property
         await editProperty(props.property.id, data, imageUrls, deletedImageIDs);
         toast.success("Property Updated!");
       } else {
+        // Save new property
         await saveProperty(data, imageUrls, user?.id as string);
         toast.success("Property Added!");
       }
     } catch (error) {
+      // Handle submission errors
       console.error({ error });
       toast.error("Something went wrong!");
     } finally {
+      // Navigate back to properties list
       router.push("/user/properties");
     }
   };
 
   return (
     <div>
+      {/* Stepper component to show current form step */}
       <Stepper
         className="m-2"
         items={steps}
         activeItem={step}
         setActiveItem={setStep}
       />
+      {/* Form provider for react-hook-form */}
       <FormProvider {...methods}>
         <form className="mt-3 p-2" onSubmit={methods.handleSubmit(onSubmit)}>
+          {/* Conditional rendering of form steps */}
           {step === 0 && (
             <Basic
               next={() => setStep((prev) => prev + 1)}

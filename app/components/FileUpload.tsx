@@ -2,14 +2,17 @@
 
 import React, { useState } from "react";
 
+// Interface defining props for the FileInput component
+// Extends input attributes while omitting the 'type' attribute
 interface FileInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
-  labelText?: string;
-  onSelect?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  error?: string;
-  buttonText?: string;
+  labelText?: string; // Optional label text for the input
+  onSelect?: (e: React.ChangeEvent<HTMLInputElement>) => void; // Optional callback when file is selected
+  error?: string; // Optional error message to display
+  buttonText?: string; // Optional custom text for upload button
 }
 
+// FileInput component using forwardRef to allow ref forwarding
 const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
   (
     {
@@ -23,13 +26,19 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
     },
     ref
   ) => {
+    // State to store the name of the selected file
     const [fileName, setFileName] = useState<string>("");
 
+    // Handler for file selection event
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      // Get the first selected file
       const file = e.target.files?.[0];
       if (file) {
+        // Update filename state
         setFileName(file.name);
+        // Call original onChange handler if provided
         onChange?.(e);
+        // Call onSelect handler if provided
         onSelect?.(e);
       }
     };
@@ -44,6 +53,7 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
             {labelText}
           </label>
         )}
+        {/* File input wrapper with custom styling */}
         <label className="w-full relative border flex rounded-md cursor-pointer group overflow-hidden">
           <div className="inline-block h-full py-3 px-4 text-white transition-colors duration-200 bg-emerald-600 hover:bg-emerald-700 shadow-sm">
             <input
@@ -55,10 +65,12 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
             />
             {buttonText}
           </div>
+          {/* Display selected filename or default text */}
           <span className="px-4 py-3 truncate text-gray-600">
             {fileName || "No file selected"}
           </span>
         </label>
+        {/* Render error message if provided */}
         {error && (
           <p className="text-red-600 text-sm mt-1 animate-shake">{error}</p>
         )}

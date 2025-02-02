@@ -38,6 +38,7 @@ const Contact = ({ prev, className }: Props) => {
       <div>
         <label className="block text-sm font-medium text-gray-700">Phone</label>
         <input
+          type="password"
           {...register("contact.phone")}
           defaultValue={getValues("contact.phone")}
           className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
@@ -52,6 +53,7 @@ const Contact = ({ prev, className }: Props) => {
       <div>
         <label className="block text-sm font-medium text-gray-700">Email</label>
         <input
+          type="email"
           {...register("contact.email")}
           defaultValue={getValues("contact.email")}
           className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
