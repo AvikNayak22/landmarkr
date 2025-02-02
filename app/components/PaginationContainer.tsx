@@ -27,7 +27,7 @@ const PaginationContainer = ({
           onClick={() => router.push(`${route}?pagenum=${page}`)}
           className={`px-3 py-1 rounded ${
             currentPage === page
-              ? "bg-teal-500 text-white"
+              ? "bg-emerald-500 text-white"
               : "bg-gray-200 hover:bg-gray-300"
           }`}
         >

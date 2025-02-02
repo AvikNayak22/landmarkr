@@ -27,34 +27,32 @@ interface Props {
 
 const PropertyCard = ({ property }: Props) => {
   return (
-    <div className="w-80 flex flex-col rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+    <div className="w-80 flex flex-col rounded-2xl border border-gray-200 shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300">
       {/* Image Container */}
-      <div className="relative w-full h-52">
+      <div className="relative w-full h-56">
         <Image
           fill
           src={property.images[0]?.url}
           alt={property.name}
-          className="object-cover"
+          className="object-cover filter brightness-90"
         />
       </div>
 
       {/* Details Section */}
-      <div className="flex flex-col flex-grow p-4 bg-white">
-        <p className="text-primary-600 text-lg font-semibold">
-          {property.name}
-        </p>
-        <p className="text-gray-500 text-sm">
+      <div className="flex flex-col flex-grow p-5 bg-gray-50">
+        <p className="text-gray-800 text-xl font-bold mb-1">{property.name}</p>
+        <p className="text-gray-600 text-sm">
           {property.location?.city}, {property.location?.state}
         </p>
       </div>
 
       {/* Footer Section */}
-      <div className="bg-teal-600 p-4 flex justify-between items-center">
-        <p className="text-white font-semibold">
+      <div className="bg-emerald-600 p-4 flex justify-between items-center">
+        <p className="text-white font-bold text-lg">
           {formatPrice(property.price)}
         </p>
         <Link
-          className="text-white text-sm font-medium hover:underline "
+          className="text-white text-sm font-semibold hover:bg-white hover:text-emerald-600 px-3 py-2 rounded-lg transition-colors "
           href={`/property/${property.id}`}
         >
           View Details

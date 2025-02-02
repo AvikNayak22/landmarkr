@@ -137,14 +137,14 @@ const Location = (props: Props) => {
 
         <div className="flex justify-center col-span-2 gap-3">
           <button
-            className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-md w-36 justify-center hover:bg-teal-700"
+            className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-md w-36 justify-center hover:bg-emerald-700"
             onClick={props.prev}
           >
             <FaChevronLeft className="w-5 h-5" />
             Previous
           </button>
           <button
-            className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-md w-36 justify-center hover:bg-teal-700"
+            className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-md w-36 justify-center hover:bg-emerald-700"
             onClick={handleNext}
           >
             Next

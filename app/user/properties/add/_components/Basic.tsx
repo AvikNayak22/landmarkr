@@ -34,7 +34,7 @@ const Basic = (props: Props) => {
           <input
             {...register("name")}
             type="text"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
             placeholder="Property Name"
           />
           {errors.name && (
@@ -50,7 +50,7 @@ const Basic = (props: Props) => {
           </label>
           <textarea
             {...register("description")}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 min-h-[100px]"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 min-h-[100px]"
             placeholder="Property Description"
           />
           {errors.description && (
@@ -66,7 +66,7 @@ const Basic = (props: Props) => {
           </label>
           <select
             {...register("typeId")}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
             defaultValue={getValues().typeId?.toString()}
           >
             <option value="" disabled>
@@ -91,7 +91,7 @@ const Basic = (props: Props) => {
           </label>
           <select
             {...register("statusId")}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
             defaultValue={getValues().statusId?.toString()}
           >
             <option value="" disabled>
@@ -117,7 +117,7 @@ const Basic = (props: Props) => {
           <input
             {...register("price")}
             type="number"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
             placeholder="Enter price"
           />
           {errors.price && (
@@ -137,7 +137,7 @@ const Basic = (props: Props) => {
           </button>
           <button
             onClick={handleNext}
-            className="flex items-center justify-center w-36 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="flex items-center justify-center w-36 px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
           >
             Next
             <FaChevronRight className="w-4 h-4 ml-2" />

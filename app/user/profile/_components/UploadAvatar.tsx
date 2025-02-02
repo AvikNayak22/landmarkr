@@ -37,7 +37,7 @@ const UploadAvatar = ({ userId }: { userId: string }) => {
       <button className="p-2 rounded-md hover:bg-gray-100" onClick={handleOpen}>
         <MdModeEdit
           size={24}
-          className="w-6 text-slate-400 hover:text-teal-500 transition-colors"
+          className="w-6 text-slate-400 hover:text-emerald-500 transition-colors"
         />
       </button>
 
@@ -73,7 +73,7 @@ const UploadAvatar = ({ userId }: { userId: string }) => {
                   Cancel
                 </button>
                 <button
-                  className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors disabled:opacity-50"
+                  className="px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors disabled:opacity-50"
                   onClick={handleSubmit}
                   disabled={isSubmitting}
                 >

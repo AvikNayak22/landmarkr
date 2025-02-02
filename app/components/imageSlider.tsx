@@ -85,7 +85,7 @@ export const ImagesSlider = ({
         clearInterval(interval);
       }
     };
-  }, []); // Empty dependency array since handlers don't depend on any state
+  }, []);
 
   const slideVariants = {
     initial: {
@@ -121,7 +121,7 @@ export const ImagesSlider = ({
   if (isLoading) {
     return (
       <div
-        className={`h-[540px] w-full flex items-center justify-center ${className}`}
+        className={`h-[400px] md:h-[540px] w-full flex items-center justify-center ${className}`}
       >
         <div className="animate-pulse bg-gray-200 rounded-xl w-full h-full" />
       </div>

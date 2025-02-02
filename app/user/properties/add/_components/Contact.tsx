@@ -26,7 +26,7 @@ const Contact = ({ prev, className }: Props) => {
         <input
           {...register("contact.name")}
           defaultValue={getValues("contact.name")}
-          className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 ${
+          className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
             errors.contact?.name ? "border-red-500" : "border-gray-300"
           }`}
         />
@@ -40,7 +40,7 @@ const Contact = ({ prev, className }: Props) => {
         <input
           {...register("contact.phone")}
           defaultValue={getValues("contact.phone")}
-          className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 ${
+          className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
             errors.contact?.phone ? "border-red-500" : "border-gray-300"
           }`}
         />
@@ -54,7 +54,7 @@ const Contact = ({ prev, className }: Props) => {
         <input
           {...register("contact.email")}
           defaultValue={getValues("contact.email")}
-          className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 ${
+          className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
             errors.contact?.email ? "border-red-500" : "border-gray-300"
           }`}
         />
@@ -66,7 +66,7 @@ const Contact = ({ prev, className }: Props) => {
       <div className="flex justify-center col-span-3 gap-3 mt-4">
         <button
           onClick={prev}
-          className="flex items-center justify-center w-36 px-4 py-2 text-white bg-teal-600 rounded-lg hover:bg-teal-700 focus:outline-none"
+          className="flex items-center justify-center w-36 px-4 py-2 text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus:outline-none"
         >
           <FaChevronLeft className="w-6 mr-2" /> Previous
         </button>

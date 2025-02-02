@@ -21,12 +21,12 @@ const Search = () => {
   }, 1000);
 
   return (
-    <div className="p-6 flex items-center justify-center bg-gradient-to-br from-cyan-500 to-teal-600 min-h-[15vh]">
+    <div className="p-6 flex items-center justify-center bg-gradient-to-br from-teal-500 to-emerald-600 min-h-[15vh]">
       <div className="relative w-full max-w-md">
         <input
           type="text"
           onChange={(e) => handleChange(e.target.value)}
-          className="w-full px-5 py-3 rounded-xl shadow-md text-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-teal-400 transition-all duration-200 ease-in-out"
+          className="w-full px-5 py-3 rounded-xl shadow-md text-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-emerald-400 transition-all duration-200 ease-in-out"
           placeholder="Search..."
           defaultValue={searchParams.get("query") ?? ""}
         />

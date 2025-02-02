@@ -45,7 +45,7 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
           </label>
         )}
         <label className="w-full relative border flex rounded-md cursor-pointer group overflow-hidden">
-          <div className="inline-block h-full py-3 px-4 text-white transition-colors duration-200 bg-teal-600 hover:bg-teal-700 shadow-sm">
+          <div className="inline-block h-full py-3 px-4 text-white transition-colors duration-200 bg-emerald-600 hover:bg-emerald-700 shadow-sm">
             <input
               className="hidden"
               ref={ref}

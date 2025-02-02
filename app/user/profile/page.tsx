@@ -14,10 +14,10 @@ const ProfilePage = async () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <PageTitle title="My Profile" linkCaption="Back to Home Page" href="/" />
-      <div className="mx-2 mt-6 p-8 bg-white border rounded-2xl shadow-lg">
+      <div className="mx-2 mt-6 p-8 bg-white border rounded-2xl shadow-md">
         <SectionTitle title="Basic Information" />
 
-        <div className="flex flex-col md:flex-row items-center gap-10 mt-4">
+        <div className="flex flex-col md:flex-row items-center gap-16 mt-8">
           <div className="flex flex-col items-center gap-2">
             <div className="relative w-36 h-36 rounded-full overflow-hidden ring-4 ring-slate-200 shadow-lg transition-transform duration-300 hover:scale-110">
               <Image
@@ -52,8 +52,8 @@ export default ProfilePage;
 
 const Attribute = ({ title, value }: { title: string; value: ReactNode }) => {
   return (
-    <div className="flex flex-col bg-gray-100 p-4 border rounded-lg shadow-sm transition-all duration-300 hover:bg-gray-200">
-      <span className="text-slate-800 font-semibold ">{title}</span>
+    <div className="flex flex-col gap-1 bg-gray-100 p-4 border rounded-xl shadow-sm transition-all duration-300 hover:bg-gray-200 hover:shadow-md">
+      <span className="text-slate-800 font-medium text-base">{title}</span>
       <span className="text-slate-600 text-sm">{value}</span>
     </div>
   );

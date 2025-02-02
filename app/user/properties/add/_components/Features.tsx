@@ -149,14 +149,14 @@ const Features = (props: Props) => {
       <div className="flex justify-center col-span-2 gap-3">
         <button
           onClick={props.prev}
-          className="flex items-center justify-center w-36 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          className="flex items-center justify-center w-36 px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
         >
           <FaChevronLeft className="w-5 mr-2" /> Previous
         </button>
 
         <button
           onClick={handleNext}
-          className="flex items-center justify-center w-36 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          className="flex items-center justify-center w-36 px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
         >
           Next <FaChevronRight className="w-5 ml-2" />
         </button>
